@@ -139,10 +139,10 @@ function asma_course_content($content) {
   global $post;
    if ($post->post_type === 'course' ) {
       $course_title = get_the_title($post->ID);
-      $hours = get_field('houres', $post_id);
+      $hours = get_field('houres', $post->ID);
        $content = $content.gravity_form(3, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours), true, 1, false);
    }
-     $student_allowed = get_field('enrollment', $post_id);
+     $student_allowed = get_field('enrollment', $post->ID);
      return $content . asma_search($course_title, $student_allowed) ;
 }
 add_filter('the_content', 'asma_course_content', 1);
@@ -151,37 +151,71 @@ add_filter('the_content', 'asma_course_content', 1);
 
 
 
-function asma_search($course_title, $student_allowed){
+function asma_search($course_title, $students_allowed){
   $search_criteria = array(
     'status'        => 'active',
     'field_filters' => array(
         'mode' => 'any',
         array(
-            'key'   => '13',
+            'key'   => '13', //PROBABLY DIFFERENT FOR YOU
             'value' => $course_title
         )
     )
-);
-$entries  = GFAPI::get_entries( 3, $search_criteria );
+  );
+  $entries  = GFAPI::get_entries( 3, $search_criteria );
 
-//print("<pre>".print_r($entries,true)."</pre>");
-if(count($entries) > $student_allowed){
-  var_dump($student_allowed);
-  
-  add_filter( 'gform_confirmation', 'custom_confirmation', 10, 4 );
-}
-else{
-  var_dump('Asma is great!');
-}
+  //print("<pre>".print_r($entries,true)."</pre>");
+ // var_dump(count($entries));
+    if(count($entries) > $students_allowed){
+        return '<p>This class is full. We love you but you are on the waiting list.</p>';
+    }
+    else{
+       return 'Asma is great!';
+      }
 
 }
+
+add_filter( 'gform_confirmation', 'custom_confirmation', 1, 4 );
 
 function custom_confirmation( $confirmation, $form, $entry, $ajax ) {  
-  $confirmation = '<p>This class is full. We love you but you are on the waiting list.</p>' ;
+  global $post;
+  $course_title = get_the_title($post->ID);
+  var_dump($course_title);
+  $students_allowed = get_field('enrollment', $post->ID);
+  $confirmation = asma_search($course_title, $students_allowed);
   return $confirmation;
 }
 
+function asma_find_students_who_enrolled(){
+  global $post;
+  $current_user = wp_get_current_user();
+  $course_title = get_the_title($post->ID);
+  $students_allowed = get_field('enrollment', $post->ID);
+  $search_criteria = array(
+    'status'        => 'active',
+    'field_filters' => array(
+        'mode' => 'any',
+        array(
+            'key'   => '13', //PROBABLY DIFFERENT FOR YOU
+            'value' => $course_title
+        )
+    )
+  );
+  $entries  = GFAPI::get_entries( 3, $search_criteria );
+  //var_dump($entries);
+  foreach ($entries as $key => $value) { 
+    if($current_user = get_field('admins', $post->ID)){
+      
+      return '<ul><li> <B>First Name: </B>' . $value['1.3'] . '</li>' .
+             '<li> <B>Last Name: </B>' . $value['1.6'] . '</li></ul>';
+    } 
+  
+     
+   }
 
+}
+
+add_filter('the_content', 'asma_find_students_who_enrolled', 1);
 
 
 
