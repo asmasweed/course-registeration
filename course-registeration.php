@@ -204,19 +204,21 @@ function asma_find_students_who_enrolled(){
   $entries  = GFAPI::get_entries( 3, $search_criteria );
   //var_dump($entries);
   foreach ($entries as $key => $value) { 
-    if($current_user = get_field('admins', $post->ID)){
+    if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+   
+      return 'You are not allowed';
       
-      return '<ul><li> <B>First Name: </B>' . $value['1.3'] . '</li>' .
-             '<li> <B>Last Name: </B>' . $value['1.6'] . '</li></ul>';
     } 
-  
+      else{
+        return '<ul><li> <B>First Name: </B>' . $value['1.3'] . '</li>' .
+             '<li> <B>Last Name: </B>' . $value['1.6'] . '</li></ul>';
+      }
      
    }
 
 }
 
 add_filter('the_content', 'asma_find_students_who_enrolled', 1);
-
 
 
 
