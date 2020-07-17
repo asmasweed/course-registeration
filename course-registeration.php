@@ -88,12 +88,13 @@ function asma_get_schema($post){
         while( have_rows('schema', $post_id) ){
           foreach ($rows as $row) {
             the_row();
-            $schema = '<div class="schema">' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</div>';
-            echo $schema;
+            $schema .= '<ul class="schema"> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> </ul>';
+            
           }
         }
-
+        return $schema;
       }
+      
 }
 
 function asma_get_enrollment($post){
