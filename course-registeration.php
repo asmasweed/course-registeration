@@ -31,13 +31,15 @@ add_filter( 'the_content', 'asma_add_content', 1);
 
 //append content to filter
 function asma_add_content($content){
+
   global $post;
-  $post_id = $post->ID;
-  if(get_field('short_description',$post_id)){
-    $short = '<div class="short-desc"><h4>Short Description</h4>' . get_field('short_description',$post_id) . '</div>'; 
+  if ($post->post_type === 'course' ) {
+    $post_id = $post->ID;
+      if(get_field('short_description',$post_id)){
+       $short = '<div class="short-desc"><h4>Short Description</h4>' . get_field('short_description',$post_id) . '</div>'; 
   }
-  $full = asma_get_full_description($post);
-  $hours = asma_get_houres($post);
+   $full = asma_get_full_description($post);
+   $hours = asma_get_houres($post);
   $start = asma_get_start_date($post);
   $end = asma_get_start_date($post);
   $instructor = asma_get_instructor($post);
@@ -48,8 +50,12 @@ function asma_add_content($content){
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
   return  $full . $short . $start . $end . $hours . $instructor . $admin . $enrollment . $status . $cost  . $target . $schema . $content;
-}
+  }
+  else {
+    return $content; //THIS THE KEY ELEMENT
+  }
 
+}
 
 function asma_get_full_description($post){
   $post_id = $post->ID;
@@ -72,7 +78,7 @@ function asma_get_start_date($post){
     }
   }
 }
-function asma_get_houres($post){
+function asma_get_houres($post){ 
   $post_id = $post->ID;
   if(get_field('houres', $post_id)){
     $hours = '<div class="hours"><h4> Hours Of Commitment </h4>' .get_field('houres', $post_id) . '</div>';
@@ -83,6 +89,8 @@ function asma_get_houres($post){
 
 function asma_get_schema($post){
   $post_id=$post->ID;
+  $schema = '';
+  
   $rows = get_field('schema', $post_id);
       if( have_rows('schema', $post_id) ) {
         while( have_rows('schema', $post_id) ){
@@ -140,11 +148,11 @@ function asma_get_cost($post){
     return $cost;
   }
 }
-
+ 
 function asma_get_target_group($post){
   $post_id = $post->ID;
   if(get_field('target_group', $post_id)){
-    $target = '<div class="target"><h4> Taget Group </h4>' .get_field('target_group', $post_id) . '</div>';
+    $target = '<div class="target"><h4> Target Group </h4>' .get_field('target_group', $post_id) . '</div>';
     return $target;
   }
 }
@@ -155,13 +163,16 @@ function asma_get_target_group($post){
 function asma_course_content($content) {
   global $post;
    if ($post->post_type === 'course' ) {
-      $course_title = get_the_title($post->ID);
-      $hours = get_field('houres', $post->ID);
-      $instructor = get_field('instructors', $post->ID);
+       $course_title = get_the_title($post->ID);
+       $hours = get_field('houres', $post->ID);
+       $instructor = get_field('instructors', $post->ID);
        $content = $content.gravity_form(3, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
-   }
-     $student_allowed = get_field('enrollment', $post->ID);
-     echo $content . asma_search($course_title, $student_allowed) ;
+       $student_allowed = get_field('enrollment', $post->ID);
+       echo $content . asma_search($course_title, $student_allowed) ;
+      }
+      else {
+        return $content; //THIS THE KEY ELEMENT
+      }
 }
 add_filter('the_content', 'asma_course_content', 1);
 
@@ -201,8 +212,9 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   return $confirmation;
 }
 
-function asma_find_students_who_enrolled(){
+function asma_find_students_who_enrolled($content){
   global $post;
+  if ($post->post_type === 'course' ) {
   $current_user = wp_get_current_user();
   $course_title = get_the_title($post->ID);
   $students_allowed = get_field('enrollment', $post->ID);
@@ -211,7 +223,7 @@ function asma_find_students_who_enrolled(){
     'field_filters' => array(
         'mode' => 'any',
         array(
-            'key'   => '13', //PROBABLY DIFFERENT FOR YOU
+            'key'   => '13', 
             'value' => $course_title
         )
     )
@@ -232,7 +244,66 @@ function asma_find_students_who_enrolled(){
       }
     }
    echo'</ul>';
+  }
+  else {
+    return $content; //THIS THE KEY ELEMENT
+  }
+}
+add_filter('the_content', 'asma_find_students_who_enrolled', 1);
+
+function asma_get_all_data($department, $year){
+  $total_count  = 0;
+  $sorting = array('key' => '3','direction' => 'ASC' );
+  $paging  = array( 'offset' => 0, 'page_size' => 225 );
+  
+  $search_criteria = array(
+  
+    'status'    => 'active',
+    'field_filters' => array(
+      'mode' => 'any',
+      array(
+          'key'   => '3',
+          'value' => $department
+      ) ,
+      array(
+        'key'   => '17',
+        'value' => $year
+    ) 
+      
+    )
+  );
+  $entries  = GFAPI::get_entries( 3, $search_criteria, $sorting, $paging, $total_count);
+ // echo count($entries) ; 
+   echo ' <li> ' . $department . ',    ' . $year . ',    ' . $total_count . '</li>';
+  
+  
+ // var_dump($entries);
+  echo '<ul class="list">';
+  foreach ($entries as $key => $value) {  
+   //var_dump($value);
+   echo '<li> ' . $value['1.3'] . '     ' . $value['1.6'] . '  ,   '   . $value['17'] . '  ,  ' . $value['3'] . '</li>';  
+    }
+ echo'</ul>';
 }
 
-add_filter('the_content', 'asma_find_students_who_enrolled', 1);
+add_shortcode('show-data', 'asma_grouping');
+
+
+function asma_grouping(){
+  $departments = array('HS', 'HNT', 'Lärarutbildningen');
+  $years = array(2020, 2021, 2022, 2023, 2024, 2025);
+  
+  foreach($departments as $department ) {
+    $total_count = 0;
+    echo '<B>' . $department .  '</B>';
+   
+    echo '<ol>';
+      foreach( $years as $year ) {
+       
+        asma_get_all_data( $department, $year);
+      }
+      echo '</ol>';
+  }
+ 
+}
 
