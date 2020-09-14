@@ -144,7 +144,7 @@ function asma_get_status($post){
 function asma_get_cost($post){
   $post_id=$post->ID;
   if(get_field('cost', $post_id)){
-    $cost = '<div class="instructor"><h4> Cost </h4>' .get_field('cost', $post_id) . '</div>';
+    $cost = '<div class="instructor"><h4> Cost </h4>' .get_field('cost', $post_id) . ' ' . 'kr' . '</div>';
     return $cost;
   }
 }
@@ -196,7 +196,7 @@ function asma_search($course_title, $students_allowed){
         return '<p>This class is full. We love you but you are on the waiting list.</p>';
     }
     else{
-       return 'Asma is great!';
+      // return 'Asma is great!';
       }
 
 }
@@ -278,12 +278,12 @@ function asma_get_all_data($department, $year){
   
   
  // var_dump($entries);
-  echo '<ul class="list">';
+  /*echo '<ul class="list">';
   foreach ($entries as $key => $value) {  
    //var_dump($value);
    echo '<li> ' . $value['1.3'] . '     ' . $value['1.6'] . '  ,   '   . $value['17'] . '  ,  ' . $value['3'] . '</li>';  
     }
- echo'</ul>';
+ echo'</ul>';*/
 }
 
 add_shortcode('show-data', 'asma_grouping');
