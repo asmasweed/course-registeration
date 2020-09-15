@@ -236,15 +236,20 @@ function asma_find_students_who_enrolled($content){
     
   } 
   else{
-  echo '<h2>Student Who Enrolled:</h2>';
+  echo '<h2>Students Who Enrolled:</h2>';
+  if(! $entries){
+    return 'No one has enrolled yet!';
+  }
+  else{
   echo '<ul class="list">';
     foreach ($entries as $key => $value) { 
-     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '</li>';
+     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '          ' . '<button class="status"> Activ </button>' . '</li>';
        
       }
     }
    echo'</ul>';
   }
+}
   else {
     return $content; //THIS THE KEY ELEMENT
   }
