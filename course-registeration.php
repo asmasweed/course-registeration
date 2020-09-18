@@ -193,7 +193,7 @@ function asma_search($course_title, $students_allowed){
  // print("<pre>".print_r($entries,true)."</pre>");
  // var_dump(count($entries));
     if(count($entries) > $students_allowed){
-        return '<p>This class is full. We love you but you are on the waiting list.</p>';
+       // return '<p>This class is full. We love you but you are on the waiting list.</p>';
     }
     else{
       // return 'Asma is great!';
