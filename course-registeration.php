@@ -168,7 +168,7 @@ function asma_course_content($content) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructor = get_field('instructors', $post->ID);
-       $content = $content.gravity_form(3, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
+       $content = $content.gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;
       }
@@ -190,7 +190,7 @@ function asma_search($course_title, $students_allowed){
         )
     )
   );
-  $entries  = GFAPI::get_entries( 3, $search_criteria );
+  $entries  = GFAPI::get_entries( 5, $search_criteria );
 
  // print("<pre>".print_r($entries,true)."</pre>");
  // var_dump(count($entries));
@@ -225,12 +225,12 @@ function asma_find_students_who_enrolled($content){
     'field_filters' => array(
         'mode' => 'any',
         array(
-            'key'   => '13', 
+            'key'   => '38', 
             'value' => $course_title
         )
     )
   );
-  $entries  = GFAPI::get_entries( 3, $search_criteria );
+  $entries  = GFAPI::get_entries( 5, $search_criteria );
   //var_dump($entries);
   if ( ! current_user_can( 'edit_post', $post->ID ) ) {
       
