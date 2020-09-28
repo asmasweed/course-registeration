@@ -21,8 +21,10 @@ function asma_load_scripts() {
     $deps = array('jquery');
     $version= '1.0'; 
     $in_footer = true;    
-    wp_enqueue_script('asma-main-js', plugin_dir_url( __FILE__) . 'js/asma-main.js', $deps, $version, $in_footer); 
-    wp_enqueue_style( 'asma-main-css', plugin_dir_url( __FILE__) . 'css/asma-main.css');
+    wp_enqueue_script('asma-main-js', plugin_dir_url( __FILE__) . 'asma-main.js', $deps, $version, $in_footer); 
+    wp_enqueue_style( 'asma-main-css', plugin_dir_url( __FILE__) . 'asma-main.css');
+    wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
+
 }
 
 
@@ -243,8 +245,8 @@ function asma_find_students_who_enrolled($content){
   else{
   echo '<ul class="list">';
     foreach ($entries as $key => $value) { 
-     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '          ' . '<button class="status"> Activ </button>' . '</li>';
-       
+     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' .$value['id'].'"> Finish the course! </button>' . '</li>';
+     
       }
     }
    echo'</ul>';
@@ -312,3 +314,46 @@ function asma_grouping(){
  
 }
 
+
+add_action( 'wp_ajax_update_student_status', 'update_student_status' );
+ 
+function update_student_status(){
+    $complete =  $_POST['complete'];
+    $gf_id = $_POST['gf_id'];    
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { 
+          //write_log($complete);
+          
+          $entry_id = $gf_id;
+          $entry = GFAPI::get_entry( $entry_id );
+          $entry['18'] = 'Course Completed';
+          $result = GFAPI::update_entry( $entry );
+          
+          return $result;
+         
+          
+        }
+        die();
+}
+
+add_filter( 'the_content', 'ajax_button', 1 );
+ 
+function ajax_button( $content ) {
+    global $post;
+    return $content ; //. '<button id="ajax-button" data-gf_id="'.$post->ID.'">click</button>';
+}
+
+
+//LOGGER -- like frogger but more useful
+
+if ( ! function_exists('write_log')) {
+   function write_log ( $log )  {
+      if ( is_array( $log ) || is_object( $log ) ) {
+         error_log( print_r( $log, true ) );
+      } else {
+         error_log( $log );
+      }
+   }
+}
+$result = GFAPI::update_entry( $entry );
+
+  //print("<pre>".print_r($result,true)."</pre>");
