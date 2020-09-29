@@ -38,9 +38,10 @@ function asma_add_content($content){
   if ($post->post_type === 'course' ) {
     $post_id = $post->ID;
       if(get_field('short_description',$post_id)){
-       $short = '<div class="short-desc"><h4>Short Description</h4>' . get_field('short_description',$post_id) . '</div>'; 
+       $short = '<div class="short-desc"><h4></h4>' . get_field('short_description',$post_id) . '</div>'; 
   }
    $full = asma_get_full_description($post);
+   $litrature = asma_get_course_litrature($post);
    $hours = asma_get_houres($post);
   $start = asma_get_start_date($post);
   $end = asma_get_start_date($post);
@@ -51,7 +52,7 @@ function asma_add_content($content){
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  return  $full . $short . $start . $end . $hours . $instructor . $admin . $enrollment . $status . $cost  . $target . $schema . $content;
+  return  $short . $full . $litrature . $start . $end . $hours . $instructor . $admin . $enrollment . $status . $cost  . $target . $schema . $content;
   }
   else {
     return $content; //THIS THE KEY ELEMENT
@@ -64,6 +65,16 @@ function asma_get_full_description($post){
   if(get_field('full_description',$post_id)){
     $full = '<div class="full-desc"><h4>Full Description</h4>' .get_field('full_description',$post_id) . '</div>';
     return $full;
+  }
+}
+
+
+
+function asma_get_course_litrature($post){
+  $post_id = $post->ID;
+  if(get_field('course_litrature',$post_id)){
+    $litrature = '<div class="full-desc"><h4>Course litrature</h4>' .get_field('course_litrature',$post_id) . '</div>';
+    return $litrature;
   }
 }
 
