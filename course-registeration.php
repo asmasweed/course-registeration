@@ -44,7 +44,7 @@ function asma_add_content($content){
    $litrature = asma_get_course_litrature($post);
    $hours = asma_get_houres($post);
    $overview = asma_get_start_date($post);
-  $end = asma_get_start_date($post);
+  //$end = asma_get_start_date($post);
   $instructor = asma_get_instructor($post);
   $admin = asma_get_admin($post);
   $enrollment = asma_get_enrollment($post);
