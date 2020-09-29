@@ -43,8 +43,8 @@ function asma_add_content($content){
    $full = asma_get_full_description($post);
    $litrature = asma_get_course_litrature($post);
    $hours = asma_get_houres($post);
-   $overview = asma_get_start_date($post);
-  //$end = asma_get_start_date($post);
+  $start = asma_get_start_date($post);
+  $end = asma_get_start_date($post);
   $instructor = asma_get_instructor($post);
   $admin = asma_get_admin($post);
   $enrollment = asma_get_enrollment($post);
@@ -52,7 +52,7 @@ function asma_add_content($content){
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  return  $short . $full . $litrature . $target . $overview . $hours . $instructor . $admin . $enrollment . $status . $cost   . $schema . $content;
+  return  $short . $full . $litrature . $start . $end . $hours . $instructor . $admin . $enrollment . $status . $cost  . $target . $schema . $content;
   }
   else {
     return $content; //THIS THE KEY ELEMENT
@@ -84,9 +84,9 @@ function asma_get_start_date($post){
 
     while( have_rows('date', $post_id) ){
        the_row();
-    $overview = '<div class="start_date"><h4>Overview </h4>' . get_sub_field('start_date', $post_id) . '   -   ' . get_sub_field('end_date', $post_id) .  '</div>';
-    
-    return $overview;
+    $start = '<div class="start_date"><h4> Start Date </h4>' . get_sub_field('start_date', $post_id) . '</div>';
+    $end =   '<div class="end_date"><h4> End Date </h4>' . get_sub_field('end_date', $post_id) . '</div>';
+    return $start . $end;
     
     }
   }
