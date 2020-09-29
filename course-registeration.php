@@ -84,7 +84,7 @@ function asma_get_start_date($post){
 
     while( have_rows('date', $post_id) ){
        the_row();
-    $overview = '<div class="start_date"><h4>Overview </h4>' . get_sub_field('start_date', $post_id) . '   -   ' get_sub_field('end_date', $post_id) .  '</div>';
+    $overview = '<div class="start_date"><h4>Overview </h4>' . get_sub_field('start_date', $post_id) . '   -   ' . get_sub_field('end_date', $post_id) .  '</div>';
     
     return $overview;
     
