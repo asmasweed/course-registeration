@@ -46,14 +46,13 @@ function asma_add_content($content){
    $overview = asma_get_start_date($post);
   $end = asma_get_start_date($post);
   $instructor = asma_get_instructor($post);
-  $admin = asma_get_admin($post);
+ // $admin = asma_get_admin($post);
   $enrollment = asma_get_enrollment($post);
   $status = asma_get_status($post);
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  $guidelines = asma_get_guidelines($post);
-  return  $short . $full . $litrature .  $overview  . $hours . $instructor . $admin . $enrollment . $status . $cost  . $target . $schema . $guidelines . $content;
+  return  $short . $full . $litrature .  $overview  . $hours . $instructor . $enrollment . $status . $cost  . $target . $schema . $content;
   }
   else {
     return $content; //THIS THE KEY ELEMENT
@@ -64,7 +63,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4>Full Description</h4>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><B>Full Description:  </B>' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
@@ -137,17 +136,8 @@ function asma_get_instructor($post){
     return $instructor;
   }
 }
-//contribute_to_suhf:s_guidelines
 
-function asma_get_guidelines($post){
-  $post_id = $post->ID;
-  if(get_field('contribute_to_suhf:s_guidelines', $post_id)){
-    $guidelines = '<div class="hours"><h4> SUHF:s guidelines </h4>' .get_field('contribute_to_suhf:s_guidelines', $post_id) . '</div>';
-    return $guidelines;
-  }
-}
-
-
+/*
 function asma_get_admin($post){
   $post_id = $post->ID;
   if(get_field('admins', $post_id)['display_name']){
@@ -155,7 +145,7 @@ function asma_get_admin($post){
   return $admin;
   }
 }
-
+*/
 
 function asma_get_status($post){
   $post_id = $post->ID;
@@ -347,7 +337,7 @@ function update_student_status(){
           
           $entry_id = $gf_id;
           $entry = GFAPI::get_entry( $entry_id );
-          $entry['18'] = 'Course Completed';
+          $entry['40'] = 'Course Completed';
           $result = GFAPI::update_entry( $entry );
           
           return $result;
@@ -379,3 +369,12 @@ if ( ! function_exists('write_log')) {
 $result = GFAPI::update_entry( $entry );
 
   //print("<pre>".print_r($result,true)."</pre>");
+
+
+  add_action( 'pre_get_posts', 'add_my_post_types_to_query' );
+ 
+function add_my_post_types_to_query( $query ) {
+    if ( is_home() && $query->is_main_query() )
+        $query->set( 'post_type', array( 'post', 'courses' ) );
+    return $query;
+}
