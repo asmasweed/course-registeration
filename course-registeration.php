@@ -28,6 +28,24 @@ function asma_load_scripts() {
 }
 
 
+add_shortcode('course_list', 'display_courses');
+
+function display_courses(){
+  $args = array(
+    'post_type' => 'course'
+  );
+  $query = new WP_Query($args);
+    if($query->have_posts()) :
+      while($query->have_posts()) :
+        $query->the_post();
+        $output = $output . "<h2>" . get_the_title() . "</h2>" . "<p>" .  get_field('short_description',$post_id) . "</p>" ;
+      endwhile;
+      wp_reset_postdata();
+    endif;
+    return $output;
+}
+
+
 
 add_filter( 'the_content', 'asma_add_content', 1);
 
@@ -197,7 +215,7 @@ function asma_search($course_title, $students_allowed){
     'field_filters' => array(
         'mode' => 'any',
         array(
-            'key'   => '13', //PROBABLY DIFFERENT FOR YOU
+            'key'   => '38', //PROBABLY DIFFERENT FOR YOU
             'value' => $course_title
         )
     )

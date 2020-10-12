@@ -4,13 +4,14 @@ console.log(buttons);
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
       this.value;
+     button.innerHTML = 'Completed';
       console.log(button.dataset.id);
       studentUpdate(button);
     });
   });
   
   function studentUpdate(button){
-    var complete = this.value;
+    var complete = button.value;
     var gf_id = button.dataset.id;
     //console.log(button.dataset.id);
     console.log(complete);
