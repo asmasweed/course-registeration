@@ -17,14 +17,19 @@ defined( 'ABSPATH' ) or die( 'Hey, what are you doing here?' );
 
 add_action('wp_enqueue_scripts', 'asma_load_scripts');
 
-function asma_load_scripts() {                           
-    $deps = array('jquery');
-    $version= '1.0'; 
-    $in_footer = true;    
-    wp_enqueue_script('asma-main-js', plugin_dir_url( __FILE__) . 'asma-main.js', $deps, $version, $in_footer); 
-    wp_enqueue_style( 'asma-main-css', plugin_dir_url( __FILE__) . 'asma-main.css');
-    wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
-
+function display_courses(){
+  $args = array(
+    'post_type' => 'course'
+  );
+  $query = new WP_Query($args);
+    if($query->have_posts()) :
+      while($query->have_posts()) :
+        $query->the_post();
+        $output = $output . "<h2><a href=" . get_permalink($post_id) . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description',$post_id) . "</p>" ;
+      endwhile;
+      wp_reset_postdata();
+    endif;
+    return $output;
 }
 
 
