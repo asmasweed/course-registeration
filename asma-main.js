@@ -4,7 +4,13 @@ console.log(buttons);
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
       this.value;
+      if(button.innerHTML = 'FINISH THE COURSE'){
       button.innerHTML = 'Completed';
+      }
+      else{
+        document.getElementById("").disabled = true;
+      }
+      document.getElementById("").disabled = true;  
       console.log(button.dataset.id);
       studentUpdate(button);
       
