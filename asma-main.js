@@ -10,7 +10,7 @@ buttons.forEach((button) => {
       else{
         document.getElementById("").disabled = true;
       }
-      document.getElementById("").disabled = true;  
+       
       console.log(button.dataset.id);
       studentUpdate(button);
       
