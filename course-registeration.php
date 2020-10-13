@@ -89,7 +89,8 @@ function asma_get_full_description($post){
 function asma_get_course_litrature($post){
   $post_id = $post->ID;
   if(get_field('course_litrature',$post_id)){
-    $litrature = '<div class="full-desc"><h4>Course litrature</h4>' .get_field('course_litrature',$post_id) . '</div>';
+    $litrature1 .= '<ul class="full-desc"><li>' .get_field('course_litrature',$post_id) . '</li></ul>';
+    $litrature = '<div class="litr"><h4>Course litrature</h4> <p>' . $litrature1 . '</p></div>';
     return $litrature;
   }
 }
@@ -196,13 +197,16 @@ function asma_get_target_group($post){
 
 /*************************************/
 
+
 function asma_course_content($content) {
   global $post;
    if ($post->post_type === 'course' ) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructor = get_field('instructors', $post->ID);
-       $content = $content.gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
+       $content = $content. '_______________________________________________________________________________' . '<Br>' .
+       '<h2> Registration Form </h2>' .
+       gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;
       }
