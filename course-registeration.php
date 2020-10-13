@@ -69,8 +69,7 @@ function asma_add_content($content){
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  return  $short . $full . $litrature .  $overview  . $hours . $instructor . $enrollment . $status . $cost  . $target . $schema . $content;
-  }
+  return  $short . $full . $litrature . $target .  $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $content;  }
   else {
     return $content; //THIS THE KEY ELEMENT
   }
@@ -80,7 +79,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><B>Full Description:  </B>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc">' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
@@ -101,7 +100,7 @@ function asma_get_start_date($post){
 
     while( have_rows('date', $post_id) ){
        the_row();
-    $overview = '<div class="start_date"><h4> Overview </h4>' . get_sub_field('start_date', $post_id) . '    -    ' .  get_sub_field('end_date', $post_id) . '</div>';
+    $overview = '<div class="start_date"><h4> Course Period </h4>' . get_sub_field('start_date', $post_id) . '    -    ' .  get_sub_field('end_date', $post_id) . '</div>';
    /// $end =   '<div class="end_date"><h4> End Date </h4>' . get_sub_field('end_date', $post_id) . '</div>';
     return $overview;
     
@@ -127,7 +126,7 @@ function asma_get_schema($post){
         while( have_rows('schema', $post_id) ){
           foreach ($rows as $row) {
             the_row();
-            $schema .= '<ul class="schema"> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> </ul>';
+            $schema .= '<ul class="schema"> <li> <h4> Schedule </h4>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> </ul>';
             
           }
         }
