@@ -4,9 +4,10 @@ console.log(buttons);
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
       this.value;
-     button.innerHTML = 'Completed';
+      button.innerHTML = 'Completed';
       console.log(button.dataset.id);
       studentUpdate(button);
+      
     });
   });
   

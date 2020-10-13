@@ -69,7 +69,7 @@ function asma_add_content($content){
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  return  $short . $full . $litrature . $target .  $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $content;  }
+  return  $short . $target . $full . $litrature . $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $content;  }
   else {
     return $content; //THIS THE KEY ELEMENT
   }
@@ -79,7 +79,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc">' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4>Full Description</h4>' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
