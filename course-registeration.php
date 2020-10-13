@@ -117,21 +117,22 @@ function asma_get_houres($post){
 }
 
 
+
 function asma_get_schema($post){
   $post_id=$post->ID;
-  $schema = '';
+  $schema1 = '';
   
   $rows = get_field('schema', $post_id);
-      $title = '<h4>Schedule</h4>';
+     // $title = '<h4>Schedule</h4>';
       if( have_rows('schema', $post_id) ) {
-         ;
+         
         
         while( have_rows('schema', $post_id) ){
           
           foreach ($rows as $row) {
             the_row();
             $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
-            $schema = $title . $schema1;
+            $schema ='<div class="schema"> <h4> Schedule </h4> <p>' . $schema1 . '</p></div>';
           }
         }
         return $schema;
