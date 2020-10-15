@@ -249,8 +249,8 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   //var_dump($course_title);
   $students_allowed = get_field('enrollment', $post->ID);
  // $confirmation = asma_search($course_title, $students_allowed);
- if( $form['id'] == '2' ) {
- $confirmation = array( 'redirect' => 'http://www.google.com' );
+ if( $form['id'] == '5' ) {
+ $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
  }
  else{
    $confirmation = 'Thank you! we will contact you soon.';
