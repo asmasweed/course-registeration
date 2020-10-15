@@ -3,15 +3,15 @@ console.log(buttons);
 var state = false;
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      this.value;
-      state = !state;
+     // this.value;
+     state = !state;
       if(state){
-        button.innerHTML = 'FINISH THE COURSE';
+        button.innerHTML = 'COMPLETED';
       }
      
       
       else{
-        button.innerHTML = 'Completed';
+        button.innerHTML = 'FINISH THE COURSE';
       }
        
 
