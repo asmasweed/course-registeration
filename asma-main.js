@@ -1,16 +1,23 @@
 var buttons = document.querySelectorAll(".status");
 console.log(buttons);
-
+var state = false;
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
       this.value;
-      if(button.innerHTML = 'FINISH THE COURSE'){
-      button.innerHTML = 'Completed';
+      state = !state;
+      if(state){
+        button.innerHTML = 'FINISH THE COURSE';
       }
+     
+      
       else{
-        document.getElementById("").disabled = true;
+        button.innerHTML = 'Completed';
       }
        
+
+
+
+      
       console.log(button.dataset.id);
       studentUpdate(button);
       

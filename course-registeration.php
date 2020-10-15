@@ -31,7 +31,8 @@ function asma_load_scripts() {
 add_shortcode('course_list', 'display_courses');
 function display_courses(){
   $args = array(
-    'post_type' => 'course'
+    'post_type' => 'course',
+    'orderby' => 'date'
   );
   $query = new WP_Query($args);
     if($query->have_posts()) :
