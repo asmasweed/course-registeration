@@ -79,7 +79,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4>Full Description</h4>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4> Description</h4>' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
@@ -132,7 +132,7 @@ function asma_get_schema($post){
           
           foreach ($rows as $row) {
             the_row();
-            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
+            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ',   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
             $schema ='<div class="schema"> <h4> Schedule </h4> <p>' . get_field('comment_of_the_schedule', $post_id) . '</p> <p>'  . $schema1 . '</p></div>';
           }
         }
