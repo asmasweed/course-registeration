@@ -11,7 +11,7 @@ buttons.forEach((button) => {
      
       
       else{
-        button.innerHTML = 'FINISH THE COURSE';
+        button.innerHTML = 'FINISH THE COURSE!';
       }
        
 
