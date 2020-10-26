@@ -31,8 +31,8 @@ function asma_load_scripts() {
 add_shortcode('course_list', 'display_courses');
 function display_courses(){
   $args = array(
-    'post_type' => 'course',
-    'orderby' => 'date'
+    'post_type' => 'course'
+   // 'orderby' => 'date'
   );
   $query = new WP_Query($args);
     if($query->have_posts()) :
@@ -298,12 +298,12 @@ function asma_find_students_who_enrolled($content){
     foreach ($entries as $key => $value) { 
      echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' . $value['id'].'"> Finish the course! </button>' . '</li>';
      
-      }
-    }
+      }//foreach
+    }//else
    echo'</ul>';
-  }
-}
-}
+  
+}//elseh2
+}//if post
   else {
     return $content; //THIS THE KEY ELEMENT
   }
