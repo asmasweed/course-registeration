@@ -18,7 +18,7 @@ buttons.forEach((button) => {
      
       
     });
-  });
+  
   
   function studentUpdate(button){
     var complete = button.value;

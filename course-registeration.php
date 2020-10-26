@@ -239,16 +239,20 @@ function asma_search($course_title, $students_allowed){
 }
 
 add_filter( 'gform_confirmation', 'custom_confirmation', 1, 4 );
-
 function custom_confirmation( $confirmation, $form, $entry, $ajax ) {  
   global $post;
   $course_title = get_the_title($post->ID);
-  var_dump($course_title);
+  //var_dump($course_title);
   $students_allowed = get_field('enrollment', $post->ID);
-  $confirmation = asma_search($course_title, $students_allowed);
+ // $confirmation = asma_search($course_title, $students_allowed);
+ if( $form['id'] == '2' ) {
+ $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
+ }
+ else{
+   $confirmation = 'Thank you! we will contact you soon.';
+ }
   return $confirmation;
 }
-
 function asma_find_students_who_enrolled($content){
   global $post;
   if ($post->post_type === 'course' ) {
