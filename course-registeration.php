@@ -122,15 +122,15 @@ function asma_get_schema($post){
   
   $rows = get_field('schema', $post_id);
      // $title = '<h4>Schedule</h4>';
-      if( have_rows('schema', $post_id) ) {
+      if( have_rows('schedule', $post_id) ) {
          
         
-        while( have_rows('schema', $post_id) ){
+        while( have_rows('schedule', $post_id) ){
           
           foreach ($rows as $row) {
             the_row();
             $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
-            $schema ='<div class="schema"> <h4> Schedule </h4>'  . $schema1 . '<p>' . get_field('comment_of_the_schedule', $post_id) . '</p></div>';
+            $schema ='<div class="schema"> <h4> Schedule </h4><p>'  . $schema1 . '</p><p>' . get_field('comment_of_the_schedule', $post_id) . '</p></div>';
           }
         }
         return $schema;
