@@ -296,22 +296,14 @@ function asma_find_students_who_enrolled($content){
   else{
   echo '<ul class="list">';
     foreach ($entries as $key => $value) { 
-        if ($value['40'] = 'Course Completed')
-        {
-           $course_state = 'Not Completed';
-           } 
-           else { 
-             $course_state = 'Course Completed'; 
-            } 
-            echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . ' ' . '<button class="status" data-id= "' . $value['id'] .'"> ' . $course_state . '</button>' . '</li>';
-        }     
+     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' . $value['id'].'"> Finish the course! </button>' . '</li>';
+     
       }
     }
-  
    echo'</ul>';
   }
-
-
+}
+}
   else {
     return $content; //THIS THE KEY ELEMENT
   }
