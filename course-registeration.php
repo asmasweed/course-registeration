@@ -246,13 +246,13 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   $students_allowed = get_field('enrollment', $post->ID);
  // $confirmation = asma_search($course_title, $students_allowed);
  if( $form['id'] == '5' ) {
- $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
+  $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
+  }
+  else{
+    $confirmation = 'Thank you! we will contact you soon.';
+  }
+   return $confirmation;
  }
- else{
-   $confirmation = 'Thank you! we will contact you soon.';
- }
-  return $confirmation;
-}
 function asma_find_students_who_enrolled($content){
   global $post;
   if ($post->post_type === 'course' ) {
