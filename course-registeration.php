@@ -89,7 +89,7 @@ function asma_get_full_description($post){
 function asma_get_course_litrature($post){
   $post_id = $post->ID;
   if(get_field('course_literature',$post_id)){
-    $litrature = '<div class="full-desc"><h4>Course literature</h4>' .get_field('course_litrature',$post_id) . '</div>';
+    $litrature = '<div class="full-desc"><h4>Course literature</h4>' .get_field('course_literature',$post_id) . '</div>';
     return $litrature;
   }
 }
