@@ -3,23 +3,10 @@ console.log(buttons);
 var state = false;
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-     // this.value;
-     state = !state;
-      if(state){
-        button.innerHTML = 'COMPLETED';
-      }
-     
-      
-      else{
-        button.innerHTML = 'FINISH THE COURSE!';
-      }
-       
-
-
-
-      
+    
       console.log(button.dataset.id);
       studentUpdate(button);
+     
       
     });
   });
@@ -27,7 +14,7 @@ buttons.forEach((button) => {
   function studentUpdate(button){
     var complete = button.value;
     var gf_id = button.dataset.id;
-    //console.log(button.dataset.id);
+    console.log(button.dataset.id);
     console.log(complete);
     
     jQuery.ajax({

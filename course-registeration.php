@@ -80,10 +80,12 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4> Description</h4>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4> Description</h4>' .get_field('full_description',$post_id) . '<p><h4> Learning Objectiv:</h4></p><ul><li></li></ul>' '</div>';
     return $full;
   }
 }
+
+
 
 
 
@@ -91,7 +93,7 @@ function asma_get_course_litrature($post){
   $post_id = $post->ID;
   if(get_field('course_litrature',$post_id)){
     $litrature1 .= '<ul class="full-desc"><li>' .get_field('course_litrature',$post_id) . '</li></ul>';
-    $litrature = '<div class="litr"><h4>Course litrature</h4> <p>' . $litrature1 . '</p></div>';
+    $litrature = '<div class="litr"><h4>Course literature</h4> <p>' . $litrature1 . '</p></div>';
     return $litrature;
   }
 }
@@ -205,15 +207,19 @@ function asma_course_content($content) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructor = get_field('instructors', $post->ID);
-       $content = $content. '<p>__________________________________________________</p>' . '<Br>' .
+       $status = get_field('openclosed', $post->ID);
+       if($status === 'Open'){
+       $content = $content. '<p>__________________________________________________</p>' . 
        '<h2> Registration Form </h2>' .
        gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;
       }
+    
       else {
-        return $content; //THIS THE KEY ELEMENT
+        echo $content; //THIS THE KEY ELEMENT
       }
+   }  
 }
 add_filter('the_content', 'asma_course_content', 1);
 
@@ -254,7 +260,7 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
  $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
  }
  else{
-   $confirmation = 'Thank you! we will contact you soon.';
+   $confirmation = 'https://sola.kau.se/course-registration/certificates/' );
  }
   return $confirmation;
 }
@@ -287,15 +293,24 @@ function asma_find_students_who_enrolled($content){
   if(! $entries){
     return 'No one has enrolled yet!';
   }
+  
   else{
-  echo '<ul class="list">';
-    foreach ($entries as $key => $value) { 
-     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' .$value['id'].'"> Finish the course! </button>' . '</li>';
-     
+    echo '<ul class="list">';
+      foreach ($entries as $key => $value) { 
+          if ($value['40'] = 'Course Completed')
+          {
+             $course_state = 'Not Completed';
+             } 
+             else { 
+               $course_state = 'Course Completed'; 
+              } 
+              echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . ' ' . '<button class="status" data-id= "' . $value['id'] .'"> ' . $course_state . '</button>' . '</li>';
+          }     
+        }
       }
-    }
-   echo'</ul>';
-  }
+    
+     echo'</ul>';
+    
 }
   else {
     return $content; //THIS THE KEY ELEMENT
