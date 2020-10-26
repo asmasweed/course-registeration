@@ -80,7 +80,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4> Description</h4>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4> Description</h4>' . get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
@@ -296,13 +296,22 @@ function asma_find_students_who_enrolled($content){
   else{
   echo '<ul class="list">';
     foreach ($entries as $key => $value) { 
-     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' .$value['id'].'"> Finish the course! </button>' . '</li>';
-     
+        if ($value['40'] = 'Course Completed')
+        {
+           $course_state = 'Not Completed';
+           } 
+           else { 
+             $course_state = 'Course Completed'; 
+            } 
+            echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . ' ' . '<button class="status" data-id= "' . $value['id'] .'"> ' . $course_state . '</button>' . '</li>';
+        }     
       }
     }
+  
    echo'</ul>';
   }
-}
+
+
   else {
     return $content; //THIS THE KEY ELEMENT
   }
