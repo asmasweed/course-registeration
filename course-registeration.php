@@ -130,7 +130,7 @@ function asma_get_schema($post){
           foreach ($rows as $row) {
             the_row();
             $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
-            $schema ='<div class="schema"> <h4> Schedule </h4><p>'  . $schema1 . '</p></div>';
+            $schema ='<div class="schema"> <h4> Schedule </h4> <p>'  . $schema1 . '</p></div>';
           }
         }
         return $schema;
