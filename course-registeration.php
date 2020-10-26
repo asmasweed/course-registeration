@@ -89,7 +89,7 @@ function asma_get_full_description($post){
 function asma_get_course_litrature($post){
   $post_id = $post->ID;
   if(get_field('course_litrature',$post_id)){
-    $litrature = '<div class="full-desc"><h4>Course litrature</h4>' .get_field('course_litrature',$post_id) . '</div>';
+    $litrature = '<div class="full-desc"><h4>Course literature</h4>' .get_field('course_litrature',$post_id) . '</div>';
     return $litrature;
   }
 }
@@ -130,7 +130,7 @@ function asma_get_schema($post){
           
           foreach ($rows as $row) {
             the_row();
-            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> ';
+            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ',   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> ';
             $schema = $title . $schema1;
           }
         }
