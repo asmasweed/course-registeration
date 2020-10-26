@@ -32,7 +32,6 @@ add_shortcode('course_list', 'display_courses');
 function display_courses(){
   $args = array(
     'post_type' => 'course'
-   // 'orderby' => 'date'
   );
   $query = new WP_Query($args);
     if($query->have_posts()) :
@@ -70,7 +69,7 @@ function asma_add_content($content){
   $cost = asma_get_cost($post);
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
-  return  $short . $target . $full . $litrature . $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $content;  }
+  return  $short . $full . $litrature . $target .  $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $content;  }
   else {
     return $content; //THIS THE KEY ELEMENT
   }
@@ -80,20 +79,17 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4> Description</h4>' . get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc">' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
 
 
 
-
-
 function asma_get_course_litrature($post){
   $post_id = $post->ID;
   if(get_field('course_litrature',$post_id)){
-    $litrature1 .= '<ul class="full-desc"><li>' .get_field('course_litrature',$post_id) . '</li></ul>';
-    $litrature = '<div class="litr"><h4>Course literature</h4> <p>' . $litrature1 . '</p></div>';
+    $litrature = '<div class="full-desc"><h4>Course litrature</h4>' .get_field('course_litrature',$post_id) . '</div>';
     return $litrature;
   }
 }
@@ -121,26 +117,25 @@ function asma_get_houres($post){
 }
 
 
-
 function asma_get_schema($post){
   $post_id=$post->ID;
-  $schema1 = '';
+  $schema = '';
   
-  $rows = get_field('schedule', $post_id);
-   
-      if( have_rows('schedule', $post_id) ) {
-         
+  $rows = get_field('schema', $post_id);
+      $title = '<h4>Schedule</h4>';
+      if( have_rows('schema', $post_id) ) {
+         ;
         
-        while( have_rows('schedule', $post_id) ){
+        while( have_rows('schema', $post_id) ){
           
           foreach ($rows as $row) {
             the_row();
-            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ',   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
-            $schema ='<div class="schema"> <h4> Schedule </h4> <p>' . get_field('comment_of_the_schedule', $post_id) . '</p> <p>'  . $schema1 . '</p></div>';
+            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> ';
+            $schema = $title . $schema1;
           }
         }
         return $schema;
-        
+        '</ul>';
       }
       
 }
@@ -200,26 +195,19 @@ function asma_get_target_group($post){
 
 /*************************************/
 
-
 function asma_course_content($content) {
   global $post;
    if ($post->post_type === 'course' ) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructor = get_field('instructors', $post->ID);
-       $status = get_field('openclosed', $post->ID);
-       if($status === 'Open'){
-       $content = $content. '<p>__________________________________________________</p>' . 
-       '<h2> Registration Form </h2>' .
-       gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
+       $content = $content.gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;
       }
-    
       else {
-        echo $content; //THIS THE KEY ELEMENT
+        return $content; //THIS THE KEY ELEMENT
       }
-   }  
 }
 add_filter('the_content', 'asma_course_content', 1);
 
@@ -248,20 +236,14 @@ function asma_search($course_title, $students_allowed){
 
 }
 
-add_filter( 'gform_confirmation', 'custom_confirmation', 10, 4 );
+add_filter( 'gform_confirmation', 'custom_confirmation', 1, 4 );
 
 function custom_confirmation( $confirmation, $form, $entry, $ajax ) {  
   global $post;
   $course_title = get_the_title($post->ID);
-  //var_dump($course_title);
+  var_dump($course_title);
   $students_allowed = get_field('enrollment', $post->ID);
- // $confirmation = asma_search($course_title, $students_allowed);
- if( $form['id'] == '5' ) {
- $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
- }
- else{
-   $confirmation = 'https://sola.kau.se/course-registration/certificates/' );
- }
+  $confirmation = asma_search($course_title, $students_allowed);
   return $confirmation;
 }
 
@@ -296,14 +278,13 @@ function asma_find_students_who_enrolled($content){
   else{
   echo '<ul class="list">';
     foreach ($entries as $key => $value) { 
-     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' . $value['id'].'"> Finish the course! </button>' . '</li>';
+     echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . '  ' . '<button class="status"   data-id= "' .$value['id'].'"> Finish the course! </button>' . '</li>';
      
-      }//foreach
-    }//else
+      }
+    }
    echo'</ul>';
-  
-}//elseh2
-}//if post
+  }
+}
   else {
     return $content; //THIS THE KEY ELEMENT
   }
