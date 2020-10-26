@@ -79,7 +79,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc">' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4>Describtion</h4>' .get_field('full_description',$post_id) . '</div>';
     return $full;
   }
 }
