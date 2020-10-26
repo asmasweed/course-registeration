@@ -116,29 +116,29 @@ function asma_get_houres($post){
   }
 }
 
-
 function asma_get_schema($post){
   $post_id=$post->ID;
-  $schema = '';
+  $schema1 = '';
   
   $rows = get_field('schema', $post_id);
-      $title = '<h4>Schedule</h4>';
+     // $title = '<h4>Schedule</h4>';
       if( have_rows('schema', $post_id) ) {
-         ;
+         
         
         while( have_rows('schema', $post_id) ){
           
           foreach ($rows as $row) {
             the_row();
-            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ',   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li> ';
-            $schema = $title . $schema1;
+            $schema1 .= '<ul> <li>' . '<B>' . get_sub_field('title', $post_id) . '</B>' . ': ' . get_sub_field('date', $post_id) . ' ,   ' . get_sub_field('start', $post_id) . ' - ' .  get_sub_field('end', $post_id) . '</li></ul> ';
+            $schema ='<div class="schema"> <h4> Schedule </h4> <p>' . $schema1 . '</p></div>';
           }
         }
         return $schema;
-        '</ul>';
+        
       }
       
 }
+
 
 function asma_get_enrollment($post){
   $post_id=$post->ID;
@@ -201,7 +201,9 @@ function asma_course_content($content) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructor = get_field('instructors', $post->ID);
-       $content = $content.gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
+       $content = $content. '_______________________________________________________________________________' . '<Br>' .
+       '<h2> Registration Form </h2>' .
+       gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor), true, 1, false);
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;
       }
