@@ -233,7 +233,7 @@ function asma_search($course_title, $students_allowed){
         return '<p>This class is full. We love you but you are on the waiting list.</p>';
     }
     else{
-       return ' Great!';
+     //  return ' Great!';
       }
 
 }
@@ -246,8 +246,12 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   $students_allowed = get_field('enrollment', $post->ID);
  // $confirmation = asma_search($course_title, $students_allowed);
  if( $form['id'] == '5' ) {
+  if(count($entries) > $students_allowed){
+    return '<p>This class is full. We love you but you are on the waiting list.</p>';
+}else{
   $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/confirmation/' );
   }
+}
   else{
     $confirmation = 'Thank you! we will contact you soon.';
   }
