@@ -201,7 +201,7 @@ function asma_get_guideline($post){
   if($guidelines){
     foreach($guidelines as $guideline){
       $guideline2 .= ' <ul><li>' . $guideline . '</li></ul>';
-      $guideline1 = '<div class="guide"> <h4> Contribute to SUHF:s guidelines </h4>'. $guideline2 . '<a href=" https://inslaget.kau.se/utbildning/universitetspedagogiskt-stod/bedomning-av-pedagogisk-skicklighet/vilka-kurser-bidrar-till ?">More about how UPEs courses contribute to the required learning outcomes!</a></div>';
+      $guideline1 = '<div class="guide"> <h4> Contribute to SUHF:s guidelines </h4>'. $guideline2 . '<a target="_blank" href=" https://inslaget.kau.se/utbildning/universitetspedagogiskt-stod/bedomning-av-pedagogisk-skicklighet/vilka-kurser-bidrar-till ?">More about how UPEs courses contribute to the required learning outcomes!</a></div>';
     } 
       return $guideline1;
   }  
