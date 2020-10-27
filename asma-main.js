@@ -1,8 +1,8 @@
 var buttons = document.querySelectorAll(".status");
 console.log(buttons);
-//var state = true;
+var state = true;
 buttons.forEach((button) => {
-   /* button.addEventListener('click', () => {
+    button.addEventListener('click', () => {
      var state = !state;
       if(state){
         button.innerHTML = 'Not Completed';
@@ -10,7 +10,7 @@ buttons.forEach((button) => {
       }
       else{
         button.innerHTML = 'Course Completed';
-      }*/
+      }
 
        
       console.log(button.dataset.id);

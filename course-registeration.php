@@ -70,7 +70,8 @@ function asma_add_content($content){
   $schema = asma_get_schema($post);
   $target = asma_get_target_group($post);
   $guideline1 = asma_get_guideline($post);
-  return  $short . $full . $litrature . $target .  $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $guideline1 . $content;  }
+  return  $short . $full . $litrature . $target .  $overview . $schema . $hours . $instructor . $enrollment . $status . $cost   . $guideline1 . $content;
+  }
   else {
     return $content; //THIS THE KEY ELEMENT
   }
@@ -198,14 +199,11 @@ function asma_get_guideline($post){
   $post_id = $post->ID;
   $guidelines = get_field('contribute_to_suhf:s_guidelines', $post_id);
   if($guidelines){
-   
     foreach($guidelines as $guideline){
       $guideline2 .= ' <ul><li>' . $guideline . '</li></ul>';
       $guideline1 = '<div class="guide"> <h4> Contribute to SUHF:s guidelines </h4>'. $guideline2 . '</div>';
     } 
       return $guideline1;
-    
-    
   }  
 }
 
