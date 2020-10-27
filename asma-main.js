@@ -1,30 +1,25 @@
-var buttons = document.querySelectorAll(".status");
+var buttons = document.querySelectorAll("button.status");
 console.log(buttons);
 var state = true;
+
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-     var state = !state;
-      if(state){
-        button.innerHTML = 'Not Completed';
-        
+      if( button.innerText === 'Not Completed'){
+        button.innerText = 'Course Completed';
       }
-      else{
-        button.innerHTML = 'Course Completed';
-      }
-
-       
-      console.log(button.dataset.id);
+      else {
+        button.innerText = 'Not Completed';
+      }       
+      //console.log(button.dataset.id);
       studentUpdate(button);
-     
-      
-    });
+    })
+  })
   
-})
   function studentUpdate(button){
-    var complete = button.value;
+    var complete = button.innerText;
     var gf_id = button.dataset.id;
-    console.log(button.dataset.id);
-    console.log(complete);
+    //console.log(button.dataset.id);
+    //console.log(complete);
     
     jQuery.ajax({
         url : test.ajax_url,

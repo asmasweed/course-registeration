@@ -207,8 +207,7 @@ function asma_get_guideline($post){
   }  
 }
 
-
-/*************************************/
+//*************************************APPEND COURSE REGISTRATION FORM
 
 function asma_course_content($content) {
   global $post;
@@ -229,6 +228,7 @@ function asma_course_content($content) {
 add_filter('the_content', 'asma_course_content', 1);
 
 
+//**********************SEARCH TO SEE IF COURSE IS FULL
 function asma_search($course_title, $students_allowed){
   $search_criteria = array(
     'status'        => 'active',
@@ -253,6 +253,8 @@ function asma_search($course_title, $students_allowed){
 
 }
 
+
+//**********************CUSTOM CONFIRMATION
 add_filter( 'gform_confirmation', 'custom_confirmation', 1, 4 );
 function custom_confirmation( $confirmation, $form, $entry, $ajax ) {  
   global $post;
@@ -272,58 +274,54 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   }
    return $confirmation;
  }
+
+
+
+ //**********************BUILD ENROLLED STUDENT LIST
 function asma_find_students_who_enrolled($content){
   global $post;
   if ($post->post_type === 'course' ) {
-  $current_user = wp_get_current_user();
-  $course_title = get_the_title($post->ID);
-  $students_allowed = get_field('enrollment', $post->ID);
-  $search_criteria = array(
-    'status'        => 'active',
-    'field_filters' => array(
-        'mode' => 'any',
-        array(
-            'key'   => '38', 
-            'value' => $course_title
-        )
-    )
-  );
+        $current_user = wp_get_current_user();
+        $course_title = get_the_title($post->ID);
+        $students_allowed = get_field('enrollment', $post->ID);
+        $search_criteria = array(
+          'status'        => 'active',
+          'field_filters' => array(
+              'mode' => 'any',
+              array(
+                  'key'   => '38', //formerly '38' <------ check this 
+                  'value' => $course_title
+              )
+          )
+        );
   $entries  = GFAPI::get_entries( 5, $search_criteria );
   //var_dump($entries);
   if ( ! current_user_can( 'edit_post', $post->ID ) ) {
-      
-    return '<B> Sorry! You are not allowed to see this!</B>';
-    
-  } 
+      return '<B> Sorry! You are not allowed to see this!</B>';
+    } 
   else{
-  echo '<h2>Students Who Enrolled:</h2>';
-  if(! $entries){
-    return 'No one has enrolled yet!';
-  }
-  else{
-    echo '<ul class="list">';
-      foreach ($entries as $key => $value) { 
-          if ($value['40'] = 'Course Completed')
-          {
-             $course_state = 'Not Completed';
-             } 
-             else { 
-               $course_state = 'Course Completed'; 
-              } 
-              echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . ' ' . '<button class="status" data-id= "' . $value['id'] .'"> ' . $course_state . '</button>' . '</li>';
-          }     
-        }
+    echo '<h2>Students Who Enrolled:</h2>';
+      if(! $entries){
+        return 'No one has enrolled yet!';
       }
-    
-     echo'</ul>';
+      else{
+        echo '<ul class="list">';
+          foreach ($entries as $key => $value) { 
+                  echo '<li> <B> Name: </B>' . $value['1.3'] .' '. $value['1.6'] . ' ' . '<button class="status" data-id= "' . $value['id'] .'"> ' . $value['40'] . '</button>' . '</li>';//<--- check the value of 15 here
+          }
+       echo'</ul>';
+      }
     }
-  
+  }
   else {
     return $content; //THIS THE KEY ELEMENT
   }
 }
+
 add_filter('the_content', 'asma_find_students_who_enrolled', 1);
 
+
+//**********************BUILD DATA LIST 
 function asma_get_all_data($department, $year){
   $total_count  = 0;
   $sorting = array('key' => '3','direction' => 'ASC' );
@@ -339,13 +337,13 @@ function asma_get_all_data($department, $year){
           'value' => $department
       ) ,
       array(
-        'key'   => '17',
+        'key'   => '38',
         'value' => $year
     ) 
       
     )
   );
-  $entries  = GFAPI::get_entries( 3, $search_criteria, $sorting, $paging, $total_count);
+  $entries  = GFAPI::get_entries( 5, $search_criteria, $sorting, $paging, $total_count);
  // echo count($entries) ; 
    echo ' <li> ' . $department . ',    ' . $year . ',    ' . $total_count . '</li>';
   
@@ -364,7 +362,7 @@ add_shortcode('show-data', 'asma_grouping');
 
 function asma_grouping(){
   $departments = array('HS', 'HNT', 'Lärarutbildningen');
-  $years = array(2021, 2022, 2023, 2024, 2025);
+  $years = array( 2021, 2022, 2023, 2024, 2025);
   
   foreach($departments as $department ) {
     $total_count = 0;
@@ -391,7 +389,8 @@ function update_student_status(){
           
           $entry_id = $gf_id;
           $entry = GFAPI::get_entry( $entry_id );
-          $entry['40'] = 'Course Completed';
+          write_log($entry);
+          $entry['40'] = $complete; // <-----------------------------------------was 40 verify 
           $result = GFAPI::update_entry( $entry );
           
           return $result;
@@ -401,12 +400,31 @@ function update_student_status(){
         die();
 }
 
+
+
+// not sure what this is . . . . ??????????
 add_filter( 'the_content', 'ajax_button', 1 );
  
 function ajax_button( $content ) {
     global $post;
     return $content ; //. '<button id="ajax-button" data-gf_id="'.$post->ID.'">click</button>';
 }
+
+
+
+//$result = GFAPI::update_entry( $entry );<------------------------seems like a stray call?
+
+  //print("<pre>".print_r($result,true)."</pre>");
+
+
+  add_action( 'pre_get_posts', 'add_my_post_types_to_query' );
+ 
+function add_my_post_types_to_query( $query ) {
+    if ( is_home() && $query->is_main_query() )
+        $query->set( 'post_type', array( 'post', 'courses' ) );
+    return $query;
+}
+
 
 
 //LOGGER -- like frogger but more useful
@@ -420,15 +438,72 @@ if ( ! function_exists('write_log')) {
       }
    }
 }
-$result = GFAPI::update_entry( $entry );
-
-  //print("<pre>".print_r($result,true)."</pre>");
 
 
-  add_action( 'pre_get_posts', 'add_my_post_types_to_query' );
- 
-function add_my_post_types_to_query( $query ) {
-    if ( is_home() && $query->is_main_query() )
-        $query->set( 'post_type', array( 'post', 'courses' ) );
-    return $query;
+//temp <----YOU CAN USE THIS IF YOU WANT TO REMOVE THE CUSTOM FIELDS PLUGIN
+
+//course custom post type
+
+// Register Custom Post Type course
+// Post Type Key: course
+
+function create_course_cpt() {
+
+  $labels = array(
+    'name' => __( 'Courses', 'Post Type General Name', 'textdomain' ),
+    'singular_name' => __( 'Course', 'Post Type Singular Name', 'textdomain' ),
+    'menu_name' => __( 'Course', 'textdomain' ),
+    'name_admin_bar' => __( 'Course', 'textdomain' ),
+    'archives' => __( 'Course Archives', 'textdomain' ),
+    'attributes' => __( 'Course Attributes', 'textdomain' ),
+    'parent_item_colon' => __( 'Course:', 'textdomain' ),
+    'all_items' => __( 'All Courses', 'textdomain' ),
+    'add_new_item' => __( 'Add New Course', 'textdomain' ),
+    'add_new' => __( 'Add New', 'textdomain' ),
+    'new_item' => __( 'New Course', 'textdomain' ),
+    'edit_item' => __( 'Edit Course', 'textdomain' ),
+    'update_item' => __( 'Update Course', 'textdomain' ),
+    'view_item' => __( 'View Course', 'textdomain' ),
+    'view_items' => __( 'View Courses', 'textdomain' ),
+    'search_items' => __( 'Search Courses', 'textdomain' ),
+    'not_found' => __( 'Not found', 'textdomain' ),
+    'not_found_in_trash' => __( 'Not found in Trash', 'textdomain' ),
+    'featured_image' => __( 'Featured Image', 'textdomain' ),
+    'set_featured_image' => __( 'Set featured image', 'textdomain' ),
+    'remove_featured_image' => __( 'Remove featured image', 'textdomain' ),
+    'use_featured_image' => __( 'Use as featured image', 'textdomain' ),
+    'insert_into_item' => __( 'Insert into course', 'textdomain' ),
+    'uploaded_to_this_item' => __( 'Uploaded to this course', 'textdomain' ),
+    'items_list' => __( 'Course list', 'textdomain' ),
+    'items_list_navigation' => __( 'Course list navigation', 'textdomain' ),
+    'filter_items_list' => __( 'Filter Course list', 'textdomain' ),
+  );
+  $args = array(
+    'label' => __( 'course', 'textdomain' ),
+    'description' => __( '', 'textdomain' ),
+    'labels' => $labels,
+    'menu_icon' => '',
+    'supports' => array('title', 'editor', 'revisions', 'author', 'trackbacks', 'custom-fields', 'thumbnail',),
+    'taxonomies' => array(),
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+    'show_in_admin_bar' => true,
+    'show_in_nav_menus' => true,
+    'can_export' => true,
+    'has_archive' => true,
+    'hierarchical' => false,
+    'exclude_from_search' => false,
+    'show_in_rest' => true,
+    'publicly_queryable' => true,
+    'capability_type' => 'post',
+    'menu_icon' => 'dashicons-universal-access-alt',
+  );
+  register_post_type( 'course', $args );
+  
+  // flush rewrite rules because we changed the permalink structure
+  global $wp_rewrite;
+  $wp_rewrite->flush_rules();
 }
+add_action( 'init', 'create_course_cpt', 0 );
