@@ -151,13 +151,20 @@ function asma_get_enrollment($post){
 }
 
 
+
 function asma_get_instructor($post){
+  $instructor1 = '';
   $post_id = $post->ID;
-  if(get_field('instructors', $post_id)['display_name']){
-    
-    $instructor = '<div class="instructor"><h4> Instructor(s) </h4>' . get_field('instructors', $post_id)['display_name'] . '</div>';
+  $users = get_field('instructors', $post_id);
+  if($users){
+    echo '<ul claass"inst">';
+    foreach($users as $user){
+    $instructor1  .= '<li>' . $user['display_name'] . '</li>';
+    $instructor = '<div class="instructor"> <h4> Instructor(s) </h4>' . $instructor1 . '</div>';
+    }
     return $instructor;
-  }
+     echo'</ul>';
+  }  
 }
 
 /*
