@@ -19,7 +19,7 @@ buttons.forEach((button) => {
       
     });
   
-  
+})
   function studentUpdate(button){
     var complete = button.value;
     var gf_id = button.dataset.id;
