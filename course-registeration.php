@@ -364,7 +364,7 @@ add_shortcode('show-data', 'asma_grouping');
 
 function asma_grouping(){
   $departments = array('HS', 'HNT', 'Lärarutbildningen');
-  $years = array(2020, 2021, 2022, 2023, 2024, 2025);
+  $years = array(2021, 2022, 2023, 2024, 2025);
   
   foreach($departments as $department ) {
     $total_count = 0;
