@@ -26,23 +26,48 @@ function asma_load_scripts() {
     wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
 
 }
+// display courses
 
-
-add_shortcode('course_list', 'display_courses');
-function display_courses(){
+add_shortcode('course_list_swedish', 'display_swedish_courses');
+function display_swedish_courses(){
+  $output = '';
   $args = array(
-    'post_type' => 'course'
+    'post_type' => 'course',
+    'posts_per_page' => 10,
+    'category_name' => 'svensk_kurs'
   );
   $query = new WP_Query($args);
     if($query->have_posts()) :
       while($query->have_posts()) :
         $query->the_post();
-        $output = $output . "<h2><a href=" . get_permalink($post_id) . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description',$post_id) . "</p>" ;
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
       endwhile;
       wp_reset_postdata();
     endif;
     return $output;
 }
+
+add_shortcode('course_list_english', 'display_english_courses');
+function display_english_courses(){
+  $output = '';
+  $args = array(
+    'post_type' => 'course',
+    'posts_per_page' => 10,
+    'category_name' => 'english_course'
+  );
+  $query = new WP_Query($args);
+    if($query->have_posts()) :
+      while($query->have_posts()) :
+        $query->the_post();
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
+      endwhile;
+      wp_reset_postdata();
+    endif;
+    return $output;
+}
+
+
+
 
 
 
