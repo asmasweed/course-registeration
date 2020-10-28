@@ -26,7 +26,7 @@ function asma_load_scripts() {
     wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
 
 }
-// display courses
+//----------- display courses----------------
 
 add_shortcode('course_list_swedish', 'display_swedish_courses');
 function display_swedish_courses(){
