@@ -28,6 +28,27 @@ function asma_load_scripts() {
 }
 //----------- display courses----------------
 
+
+add_shortcode('course_list', 'display_courses');
+function display_courses(){
+  $output = '';
+  $args = array(
+    'post_type' => 'course',
+    'posts_per_page' => 10
+    
+  );
+  $query = new WP_Query($args);
+    if($query->have_posts()) :
+      while($query->have_posts()) :
+        $query->the_post();
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
+      endwhile;
+      wp_reset_postdata();
+    endif;
+    return $output;
+}
+
+
 add_shortcode('course_list_swedish', 'display_swedish_courses');
 function display_swedish_courses(){
   $output = '';
