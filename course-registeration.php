@@ -350,7 +350,7 @@ function asma_find_students_who_enrolled($content){
   $entries  = GFAPI::get_entries( 5, $search_criteria );
   //var_dump($entries);
   if ( ! current_user_can( 'edit_post', $post->ID ) ) {
-      return '<B> Sorry! You are not allowed to see this!</B>';
+    //  return '<B> Sorry! You are not allowed to see this!</B>';
     } 
   else{
     echo '<h2>Students Who Enrolled:</h2>';
