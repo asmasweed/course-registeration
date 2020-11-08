@@ -323,7 +323,7 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   }
 }
   else{
-    $confirmation = 'Thank you! we will contact you soon.';
+    $confirmation = array( 'redirect' => 'https://sola.kau.se/course-registration/all-courses-alla-kurser/' );
   }
    return $confirmation;
  }
