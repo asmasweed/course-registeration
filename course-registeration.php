@@ -560,3 +560,16 @@ function create_course_cpt() {
   $wp_rewrite->flush_rules();
 }
 add_action( 'init', 'create_course_cpt', 0 );
+
+
+function asma_update_custom_roles() {
+  add_role(
+    'student',
+    __( 'Student' ),
+    array(
+    'read'         => true,  // true allows this capability
+    'edit_posts'   => false,
+    )
+    );
+}
+add_action( 'init', 'asma_update_custom_roles' );
