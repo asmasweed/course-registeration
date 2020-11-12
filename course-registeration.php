@@ -45,7 +45,7 @@ function display_courses(){
 
           while( have_rows('date') ) :
              the_row();
-             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p><B> The course starts:   " .  get_sub_field('start_date') .'</B><br>' . get_field('short_description') . "</p>" ;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> Start date:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
             endwhile;
     endif;
       endwhile;
@@ -72,7 +72,7 @@ function display_swedish_courses(){
 
           while( have_rows('date') ) :
              the_row();
-             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p><B> The course starts:   " .  get_sub_field('start_date') .'</B><br>' . get_field('short_description') . "</p>" ;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> Start date:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
             endwhile;
     endif;
       endwhile;
@@ -97,7 +97,7 @@ function display_english_courses(){
 
           while( have_rows('date') ) :
              the_row();
-             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p><B> The course starts:   " .  get_sub_field('start_date') .'</B><br>' . get_field('short_description') . "</p>" ;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> Start date:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
             endwhile;
     endif;
       endwhile;
