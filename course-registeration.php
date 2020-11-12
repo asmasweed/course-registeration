@@ -45,8 +45,8 @@ function display_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
-      endwhile;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> The course starts:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
+            endwhile;
     endif;
       endwhile;
   
@@ -72,8 +72,8 @@ function display_swedish_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
-      endwhile;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> The course starts:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
+            endwhile;
     endif;
       endwhile;
       wp_reset_postdata();
@@ -97,8 +97,8 @@ function display_english_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
-      endwhile;
+             $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p> The course starts:   " .  get_sub_field('start_date') .'<br>' . get_field('short_description') . "</p>" ;
+            endwhile;
     endif;
       endwhile;
       wp_reset_postdata();
