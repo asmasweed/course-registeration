@@ -45,10 +45,10 @@ function display_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
       endwhile;
     endif;
-    endwhile;
+      endwhile;
   
       wp_reset_postdata();
     endif;
@@ -72,10 +72,10 @@ function display_swedish_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
       endwhile;
     endif;
-    endwhile;
+      endwhile;
       wp_reset_postdata();
     endif;
     return $output;
@@ -97,10 +97,10 @@ function display_english_courses(){
 
           while( have_rows('date') ) :
              the_row();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' .  get_sub_field('start_date') . "</p>" ;
       endwhile;
     endif;
-    endwhile;
+      endwhile;
       wp_reset_postdata();
     endif;
     return $output;
@@ -587,7 +587,7 @@ function asma_update_custom_roles() {
     __( 'Student' ),
     array(
     'read'         => true,  // true allows this capability
-    'edit_posts'   => false,
+    'edit_posts'   => true,
     )
     );
 }
