@@ -41,8 +41,15 @@ function display_courses(){
     if($query->have_posts()) :
       while($query->have_posts()) :
         $query->the_post();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
+        if( have_rows('date') ) :
+
+          while( have_rows('date') ) :
+             the_row();
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
       endwhile;
+    endif;
+    endwhile;
+  
       wp_reset_postdata();
     endif;
     return $output;
@@ -61,8 +68,14 @@ function display_swedish_courses(){
     if($query->have_posts()) :
       while($query->have_posts()) :
         $query->the_post();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
+        if( have_rows('date') ) :
+
+          while( have_rows('date') ) :
+             the_row();
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
       endwhile;
+    endif;
+    endwhile;
       wp_reset_postdata();
     endif;
     return $output;
@@ -80,8 +93,14 @@ function display_english_courses(){
     if($query->have_posts()) :
       while($query->have_posts()) :
         $query->the_post();
-        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') . "</p>" ;
+        if( have_rows('date') ) :
+
+          while( have_rows('date') ) :
+             the_row();
+        $output = $output . "<h2><a href=" . get_permalink() . ">" . get_the_title() . "</a> </h2>" . "<p>" .  get_field('short_description') .'<br>' . get_sub_field('start_date') "</p>" ;
       endwhile;
+    endif;
+    endwhile;
       wp_reset_postdata();
     endif;
     return $output;
