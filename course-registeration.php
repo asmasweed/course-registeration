@@ -544,3 +544,58 @@ function asma_login_redirect_all() {
       }
     }      
   add_filter( 'login_redirect', 'asma_login_redirect_all', 10, 3 );
+
+  
+//create page for new users if they're student
+
+function asma_make_page($user_id){
+  $user = get_userdata( $user_id );
+   if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+       if ( in_array( 'student', $user->roles ) ) { 
+          $args = array(
+       'post_title'    =>  $user->user_login,
+       'post_author'   => $user_id,
+       'post_content'  => '',
+       'post_status'   => 'publish',
+       'post_type' => 'student'
+        );
+        $top_student_page = wp_insert_post( $args );
+        
+       }
+   }
+
+}
+
+add_action( 'add_user_to_blog', 'asma_make_page' );
+
+
+function load_student_template( $template ) {
+  global $post;
+
+  if ( 'student' === $post->post_type && locate_template( array( 'single-student.php' ) ) !== $template ) {
+      /*
+       * This is a 'student' post
+       * AND a 'single student template' is not found on
+       * theme or child theme directories, so load it
+       * from our plugin directory.
+       */
+      return plugin_dir_path( __FILE__ ) . 'single-student.php';
+  }
+
+  return $template;
+}
+
+add_filter( 'single_template', 'load_student_template' );
+
+//display student post type
+function asma_display_content($content) {
+
+global $post;
+  if($post->post_type === 'student' ) {
+  $post_id = $post->ID;
+  
+  return asma_find_student_courses();
+}
+
+}
+add_filter( 'the_content', 'asma_display_content',1);
