@@ -588,7 +588,7 @@ function load_student_template( $template ) {
 add_filter( 'single_template', 'load_student_template' );
 
 //display student post type
-
+/*
 function asma_display_content($content) {
 
 global $post;
@@ -599,4 +599,4 @@ global $post;
 }
 
 }
-add_filter( 'the_content', 'asma_display_content',1);  
+add_filter( 'the_content', 'asma_display_content',1);  */
