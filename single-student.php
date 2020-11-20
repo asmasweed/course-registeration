@@ -56,13 +56,13 @@ function asma_find_student_courses(){
           )
 		);
 		
-  $entries  = GFAPI::get_entries( 3, $search_criteria );
+  $entries  = GFAPI::get_entries( 5, $search_criteria );
   //var_dump($entries);
  echo '<h3>My courses:</h3>';
  echo '<ul class="list">';
  foreach ($entries as $key => $value) { 
-	if($value['18'] ==='Course Completed'){
-         echo '<div><li>' . $value['13']  . '</li></div>';
+	if($value['40'] ==='Course Completed'){
+         echo '<div><li>' . $value['38']  . '</li></div>';
  }
 
 echo'</ul>';
