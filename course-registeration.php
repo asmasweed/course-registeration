@@ -657,4 +657,4 @@ echo $list . '</ul>' . $certificates . '</ul>';
  
   
 }
-add_filter('the_content', 'asma_my_certificate', 1);
+//add_filter('the_content', 'asma_my_certificate', 1);
