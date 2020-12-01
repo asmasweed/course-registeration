@@ -43,6 +43,7 @@ buttons.forEach((button) => {
 //https://parall.ax/products/jspdf
 
 function demoFromHTML() {
+  
   var pdf = new jsPDF('p', 'pt', 'letter');
   // source can be HTML-formatted string, or a reference
   // to an actual DOM element from which the text will be scraped.
@@ -83,7 +84,7 @@ function demoFromHTML() {
   );
 }
 
-$('#cmd').click(function () {    
+jQuery('#cmd').click(function () {    
 demoFromHTML();
 });
 
@@ -96,3 +97,23 @@ secret.addEventListener('input', function (evt) {
 console.log(this.value);
 secretDisplay.innerHTML = this.value
 });
+
+//********************************************************************************** */
+//display the certificate of corrsponding course title
+
+let courseButtons = document.querySelectorAll('.certificate-button');
+
+//document.getElementsByClassName("certificates-list")[0].style.display = "none";
+
+
+
+courseButtons.forEach((cButton) => {
+  cButton.addEventListener('click', () => {
+    let id = cButton.dataset.course; 
+    let course = document.getElementById(id)
+    //course.classList.toggle("show");
+    course.style.display="block";
+     
+  });
+});
+
