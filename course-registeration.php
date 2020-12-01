@@ -606,7 +606,7 @@ function asma_my_certificate(){
     )
 );
 
-$entries  = GFAPI::get_entries( 3, $search_criteria );
+$entries  = GFAPI::get_entries( 5, $search_criteria );
 //var_dump($entries);
 echo '<h3>My courses:</h3>';
 $list = '';
@@ -614,8 +614,8 @@ $certificates = '';
 $list .='<ul>';
 echo'<ul>';
 foreach ($entries as $key => $value) { 
-if($value['18'] ==='Course Completed'){
-  $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['13'] . '</a></li>' ;
+if($value['40'] ==='Course Completed'){
+  $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
   $certificates .= '<div class="certificates-list">
     <div class="editor" >
     <p>The certificate below will be downloaded to your computer. No information will be stored on the server.</p>
@@ -630,7 +630,7 @@ if($value['18'] ==='Course Completed'){
        '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
        <div id="display-secret"  ></div>
         <br><br><br><br><br><br><br>
-       <h3> har genomgått '.' '.'<B>' . $value['13'] .  '.</B></h3><br>
+       <h3> har genomgått '.' '.'<B>' . $value['38'] .  '.</B></h3><br>
        <p>' . $value['20'] . '</p>
         <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
         <img src="http://localhost:8888/wordpress/wp-content/uploads/2020/11/signature.png">
