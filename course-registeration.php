@@ -24,6 +24,8 @@ function asma_load_scripts() {
     wp_enqueue_script('asma-main-js', plugin_dir_url( __FILE__) . 'asma-main.js', $deps, $version, $in_footer); 
     wp_enqueue_style( 'asma-main-css', plugin_dir_url( __FILE__) . 'asma-main.css');
     wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
+    wp_enqueue_script('jspdf.min.js', plugin_dir_url( __FILE__) . 'jspdf.min.js', $deps, $version, $in_footer);     
+
 
 }
 //----------- display courses----------------
@@ -588,7 +590,7 @@ function load_student_template( $template ) {
 add_filter( 'single_template', 'load_student_template' );
 
 // Certificat section
-
+/*
 add_shortcode('download-certificate', 'asma_my_certificate');
 function asma_my_certificate(){
   global $post;
@@ -616,6 +618,7 @@ echo'<ul>';
 foreach ($entries as $key => $value) { 
 if($value['40'] ==='Course Completed'){
   $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
+  '<br><br><hr>';
   $certificates .= '<div class="certificates-list">
     <div class="editor" >
     <p>The certificate below will be downloaded to your computer. No information will be stored on the server.</p>
@@ -657,4 +660,4 @@ echo $list . '</ul>' . $certificates . '</ul>';
  
   
 }
-//add_filter('the_content', 'asma_my_certificate', 1);
+//add_filter('the_content', 'asma_my_certificate', 1);*/

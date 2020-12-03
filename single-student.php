@@ -58,15 +58,59 @@ function asma_find_student_courses(){
 		
   $entries  = GFAPI::get_entries( 5, $search_criteria );
   //var_dump($entries);
- echo '<h3>My courses:</h3>';
- echo '<ul class="list">';
- foreach ($entries as $key => $value) { 
-	if($value['40'] ==='Course Completed'){
-         echo '<div><li>' . $value['38']  . '</li></div>';
- }
+ 
+echo '<h3>My courses:</h3>';
+$list = '';
+$certificates = '';
+$list .='<ul>';
+echo'<ul>';
+foreach ($entries as $key => $value) { 
+if($value['40'] ==='Course Completed'){
+  $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
+  '<br><br><hr>';
+  $certificates .= '<div class="certificates-list">
+    
+  <div class="course hide" id="' . $key . '" style="display:none;"   border: 1px solid #000;
+  padding: 20px;>
+  
+  <p>The certificate below will be downloaded to your computer. No information will be stored on the server.</p>
+  Entery your personal number here:
+<input id="secret"></input>
+<hr class ="left" style="border-top: dotted 1px; width:100%;" />
+<div id="certificate-content">
+      <img src="https://www.arbetsformedlingen.se/rest/arbetsgivare/rest/af/v3/organisation/2021003120/logotyper/logo-200x200.png">
+      <h1 class="certificate"><B>Intyg</B></h1>'.
+     '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
+     <div id="display-secret"  ></div>
+      <br><br><br><br><br><br><br>
+     <h3> har genomgått '.' '.'<B>' . $value['38'] .  '.</B></h3><br>
+     <p>' . $value['20'] . '</p>
+      <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
+      <img src="http://localhost:8888/wordpress/wp-content/uploads/2020/11/signature.png">
+      <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
+  <div>
+  <div class="left">
+    <em>Jörg Pareigis</em>
+  </div>
+  <div>
+    <em>Head of Centre for Teaching </em>
+  </div>
+  <div>
+   <em>and Learning </em>                                         
+  </div>
+</div>
+</div>
+<div class="editor" ></div>
+      <button id="cmd">Download PDF</button>
+  </div>';
+;
+}
 
-echo'</ul>';
-   }
+}
+echo $list . '</ul>' . $certificates . '</ul>';
+
+ 
+  
 }
 add_filter('the_content', 'asma_find_student_courses', 1);
 ?>

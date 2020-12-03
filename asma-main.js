@@ -47,7 +47,7 @@ function demoFromHTML() {
   var pdf = new jsPDF('p', 'pt', 'letter');
   // source can be HTML-formatted string, or a reference
   // to an actual DOM element from which the text will be scraped.
-  source = $('#content')[0];
+  source = jQuery('#certificate-content')[0];
 
   // we support special element handlers. Register them with jQuery-style 
   // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
@@ -87,6 +87,8 @@ function demoFromHTML() {
 jQuery('#cmd').click(function () {    
 demoFromHTML();
 });
+
+
 
 
 
