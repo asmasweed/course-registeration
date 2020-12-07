@@ -125,6 +125,7 @@ function asma_add_content($content){
        $short = '<div class="short-desc"><h4></h4>' . get_field('short_description',$post_id) . '</div>'; 
   }
    $full = asma_get_full_description($post);
+   $objectives = asma_get_course_objectives($post);
    $litrature = asma_get_course_litrature($post);
    $hours = asma_get_houres($post);
    $overview = asma_get_start_date($post);
@@ -144,15 +145,21 @@ function asma_add_content($content){
   }
 
 }
-
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) . '</div>';
+    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) .'<br>'. get_field('course_objectives', $post_id) . '</div>';
     return $full;
   }
 }
 
+function asma_get_course_objectives($post){
+  $post_id = $post->ID;
+  if(get_field('course_objectives',$post_id)){
+    $objectives = '<div class="objective">' .get_field('course_objectives',$post_id) . '</div>';
+    return $objectives;
+  }
+}
 
 
 function asma_get_course_litrature($post){
