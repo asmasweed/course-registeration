@@ -148,7 +148,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) .'<br>'. get_field('course_objectives', $post_id) . '</div>';
+    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) .'<br><B>Målet är att du efter kursen ska kunna:</B><br>'. get_field('course_objectives', $post_id) . '</div>';
     return $full;
   }
 }
