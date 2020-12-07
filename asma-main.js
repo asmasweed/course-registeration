@@ -93,28 +93,34 @@ demoFromHTML();
 
 
 //get the number and display
-let secret = document.querySelector('#secret');
-let secretDisplay = document.querySelector('#display-secret');
-secret.addEventListener('input', function (evt) {
-console.log(this.value);
-secretDisplay.innerHTML = this.value
-});
+let secret = document.querySelectorAll('.secret');
+let secretDisplay = document.querySelectorAll('.display-secret');
+secret.forEach((input) => {
+  input.addEventListener('input', function (evt) {
+    secretDisplay.forEach((id) => {
+    id.innerHTML = this.value
+    });
+    
+    });
+    
+  });
+
 
 //********************************************************************************** */
 //display the certificate of corrsponding course title
 
 let courseButtons = document.querySelectorAll('.certificate-button');
-
-//document.getElementsByClassName("certificates-list")[0].style.display = "none";
-
-
-
+let courseButtons = document.querySelectorAll('.certificate-button');
+let courses = document.querySelectorAll('.course');
 courseButtons.forEach((cButton) => {
   cButton.addEventListener('click', () => {
     let id = cButton.dataset.course; 
     let course = document.getElementById(id)
-    //course.classList.toggle("show");
-    course.style.display="block";
+    courses.forEach((course) => {
+      course.classList.add('hide')
+    });
+    course.classList.toggle("hide");
+    
      
   });
 });

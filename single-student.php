@@ -70,18 +70,17 @@ if($value['40'] ==='Course Completed'){
   '<br><br><hr>';
   $certificates .= '<div class="certificates-list">
     
-  <div class="course hide" id="' . $key . '" style="display:none;"   border: 1px solid #000;
-  padding: 20px;>
+  <div class="course hide" id="' . $key . '" >
   
   <p>The certificate below will be downloaded to your computer. No information will be stored on the server.</p>
   Entery your personal number here:
-<input id="secret"></input>
+<input class="secret"></input>
 <hr class ="left" style="border-top: dotted 1px; width:100%;" />
 <div id="certificate-content">
       <img src="https://www.arbetsformedlingen.se/rest/arbetsgivare/rest/af/v3/organisation/2021003120/logotyper/logo-200x200.png">
       <h1 class="certificate"><B>Intyg</B></h1>'.
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
-     <div id="display-secret"  ></div>
+     <div class="display-secret"  ></div>
       <br><br><br><br><br><br><br>
      <h3> har genomgått '.' '.'<B>' . $value['38'] .  '.</B></h3><br>
      <p>' . $value['20'] . '</p>
