@@ -87,7 +87,7 @@ if($value['40'] ==='Course Completed'){
       <p> har genomgått '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
       Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
-      'Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
+      '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
       Kursansvarig:' . ' ' . $value['39'] . 
       '</p>
       <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
