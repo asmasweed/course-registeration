@@ -467,6 +467,9 @@ add_action( 'wp_ajax_update_student_status', 'update_student_status' );
  
 function update_student_status(){
     $complete =  $_POST['complete'];
+    if($complete){
+      $date_clicked = date('d-m-Y');
+    }
     $gf_id = $_POST['gf_id'];    
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { 
           //write_log($complete);
@@ -475,6 +478,7 @@ function update_student_status(){
           $entry = GFAPI::get_entry( $entry_id );
           write_log($entry);
           $entry['40'] = $complete; // <-----------------------------------------was 40 verify 
+          $entry['48'] = $date_clicked;
           $result = GFAPI::update_entry( $entry );
           
           return $result;
