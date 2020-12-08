@@ -296,10 +296,11 @@ function asma_course_content($content) {
        $course_title = get_the_title($post->ID);
        $hours = get_field('houres', $post->ID);
        $instructors = get_field('instructors', $post->ID);
+       $objective = get_field('course_objectives', $post->ID);
        foreach($instructors as $instructor){
        $content = $content. '_______________________________________________________________________________' . '<Br>' .
        '<h2> Registration Form </h2>' .
-       gravity_form(5, false, false, false, array('course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor['display_name']), true, 1, false);
+       gravity_form(5, false, false, false, array('course_objectives'=> $objective, 'course_title' => $course_title, 'course_hours' => $hours, 'course_instructor' => $instructor['display_name']), true, 1, false);
        }
        $student_allowed = get_field('enrollment', $post->ID);
        echo $content . asma_search($course_title, $student_allowed) ;

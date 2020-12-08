@@ -109,7 +109,7 @@ secret.forEach((input) => {
 //********************************************************************************** */
 //display the certificate of corrsponding course title
 
-let courseButtons = document.querySelectorAll('.certificate-button');
+
 let courseButtons = document.querySelectorAll('.certificate-button');
 let courses = document.querySelectorAll('.course');
 courseButtons.forEach((cButton) => {
