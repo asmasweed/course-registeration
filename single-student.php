@@ -83,7 +83,7 @@ if($value['40'] ==='Course Completed'){
       <h1 class="certificate"><B>Intyg</B></h1>'.
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
-      <br><br><br><br><br><br><br>
+      <br><br>
       <p> har genomgått '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
       Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
