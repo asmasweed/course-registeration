@@ -68,7 +68,7 @@ foreach ($entries as $key => $value) {
 if($value['40'] ==='Course Completed'){
   $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
   '<br><br><hr>';
-  var_dump($value['47']);
+  //var_dump($value['47']);
   
   $certificates .= '<div class="certificates-list">
     
@@ -79,8 +79,8 @@ if($value['40'] ==='Course Completed'){
 <input class="secret"></input>
 <hr class ="left" style="border-top: dotted 1px; width:100%;" />
 <div id="certificate-content">
-      <img src="kau_2012_cmyk_eps_14679.png">
-      <h1 class="certificate"><B>Intyg</B></h1>'.
+      <img src="https://www.arbetsformedlingen.se/rest/arbetsgivare/rest/af/v3/organisation/2021003120/logotyper/logo-200x200.png">
+      <h1 class="certificate"><B>INTYG</B></h1>'.
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
       <br><br>
