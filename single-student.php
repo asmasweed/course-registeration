@@ -68,8 +68,8 @@ foreach ($entries as $key => $value) {
 if($value['40'] ==='Course Completed'){
   $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
   '<br><br><hr>';
-  var_dump($value['39']);
-  var_dump($value['46']);
+  var_dump($value['47']);
+  
   $certificates .= '<div class="certificates-list">
     
   <div class="course hide" id="' . $key . '" >
@@ -84,9 +84,10 @@ if($value['40'] ==='Course Completed'){
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
       <br><br><br><br><br><br><br>
-      <p> har genomgått '.' '.'<B>' . $value['38'] .  '.</B>. Kursen
+      <p> har genomgått '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
-      Kursen var avslutad och godkänd'.' '. $value['46'] .'<br>
+      Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
+      'Kursen var avslutad och godkänd'.' '. $value['46'] .'<br>
       Kursansvarig:' . ' ' . $value['39'] . 
       '</p>
       <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
