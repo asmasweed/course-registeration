@@ -90,7 +90,7 @@ if($value['40'] ==='Course Completed'){
       '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
       Kursansvarig:' . ' ' . $value['39'] . 
       '</p>
-      <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
+      <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
       <img src="http://localhost:8888/wordpress/wp-content/uploads/2020/11/signature.png">
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
   <div>
