@@ -2,7 +2,7 @@
 /*
 Plugin Name: Course Registeration
 Plugin URI:  https://github.com/
-Description: My First Plugin
+Description: Easy way to manage courses
 Version:     1.0
 Author:      Asma
 Author URI:  http://sola.kau.se
@@ -346,7 +346,7 @@ function custom_confirmation( $confirmation, $form, $entry, $ajax ) {
   //var_dump($course_title);
   $students_allowed = get_field('enrollment', $post->ID);
  // $confirmation = asma_search($course_title, $students_allowed);
- if( $form['id'] == '5' ) {
+ if( $form['id'] === '5' ) {
   if(count($entries) > $students_allowed){
     $confirmation = 'This class is full. We love you but you are on the waiting list';
 }else{
