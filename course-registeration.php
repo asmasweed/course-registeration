@@ -468,7 +468,7 @@ add_action( 'wp_ajax_update_student_status', 'update_student_status' );
 function update_student_status(){
     $complete =  $_POST['complete'];
     if($complete){
-      $date_clicked = date('d-m-Y');
+      $date_clicked = date('d-F-Y');
     }
     $gf_id = $_POST['gf_id'];    
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { 
