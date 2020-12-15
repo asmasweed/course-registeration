@@ -79,7 +79,7 @@ if($value['40'] ==='Course Completed'){
 <input class="secret"></input>
 <hr class ="left" style="border-top: dotted 1px; width:100%;" />
 <div id="certificate-content">
-      <img src="https://www.arbetsformedlingen.se/rest/arbetsgivare/rest/af/v3/organisation/2021003120/logotyper/logo-200x200.png">
+      <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/kau_2012_cmyk_eps_14679.png">
       <h1 class="certificate"><B>INTYG</B></h1>'.
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
@@ -91,7 +91,7 @@ if($value['40'] ==='Course Completed'){
       Kursansvarig:' . ' ' . $value['39'] . 
       '</p>
       <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
-      <img src="http://localhost:8888/wordpress/wp-content/uploads/2020/11/signature.png">
+      <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/jorg-signatur.png">
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
   <div>
   <div class="left">
