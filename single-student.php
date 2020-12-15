@@ -79,7 +79,7 @@ if($value['40'] ==='Course Completed'){
 <input class="secret"></input>
 <hr class ="left" style="border-top: dotted 1px; width:100%;" />
 <div id="certificate-content">
-      <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/kau_2012_cmyk_eps_14679.png">
+      <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/kau_2012_cmyk_eps_14679.png"  width="100px">
       <h1 class="certificate"><B>INTYG</B></h1>'.
      '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
