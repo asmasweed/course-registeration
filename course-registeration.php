@@ -195,7 +195,7 @@ function asma_get_schema($post){
   $post_id=$post->ID;
   $schema1 = '';
   
-  $rows = get_field('schema', $post_id);
+  $rows = get_field('schedule', $post_id);
      // $title = '<h4>Schedule</h4>';
       if( have_rows('schedule', $post_id) ) {
          
