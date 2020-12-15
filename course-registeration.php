@@ -148,7 +148,7 @@ function asma_add_content($content){
 function asma_get_full_description($post){
   $post_id = $post->ID;
   if(get_field('full_description',$post_id)){
-    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) .'<br><B>Målet är att du efter kursen ska kunna:</B><br>'. get_field('course_objectives', $post_id) . '</div>';
+    $full = '<div class="full-desc"><h4>Description</h4>' .get_field('full_description',$post_id) .'<br>'. get_field('course_objectives', $post_id) . '</div>';
     return $full;
   }
 }
@@ -177,7 +177,6 @@ function asma_get_start_date($post){
     while( have_rows('date', $post_id) ){
        the_row();
     $overview = '<div class="start_date"><h4> Course Period </h4>' . get_sub_field('start_date', $post_id) . '    -    ' .  get_sub_field('end_date', $post_id) . '</div>';
-   /// $end =   '<div class="end_date"><h4> End Date </h4>' . get_sub_field('end_date', $post_id) . '</div>';
     return $overview;
     
     }
@@ -231,7 +230,7 @@ function asma_get_instructor($post){
   $post_id = $post->ID;
   $users = get_field('instructors', $post_id);
   if($users){
-    echo '<ul claass"inst">';
+    echo '<ul class="inst">';
     foreach($users as $user){
     $instructor1  .= '<li>' . $user['display_name'] . '</li>';
     $instructor = '<div class="instructor"> <h4> Instructor(s) </h4>' . $instructor1 . '</div>';
@@ -241,15 +240,7 @@ function asma_get_instructor($post){
   }  
 }
 
-/*
-function asma_get_admin($post){
-  $post_id = $post->ID;
-  if(get_field('admins', $post_id)['display_name']){
-  $admin = '<div class="admin"><h4> Admin(s) </h4>' . get_field('admins', $post_id)['display_name'] . '</div>';
-  return $admin;
-  }
-}
-*/
+
 
 function asma_get_status($post){
   $post_id = $post->ID;
