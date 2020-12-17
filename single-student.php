@@ -84,10 +84,10 @@ if($value['40'] ==='Course Completed'){
      '<h2 class="name">'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
       <br><br>
-      <p> har genomgått '.' '.'<B>' . $value['38'] .  '</B>. Kursen
+      <p> har genomgott '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
-      Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
-      '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
+      Inom kursens ram har foljande larandemol examinerats:<br> '. $value['47'] .
+      '<br><br>Kursen var avslutad och godkand'.' '. $value['48'] .'<br>
       Kursansvarig:' . ' <B>' . $value['39'] . 
       '</B></p>
       <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
