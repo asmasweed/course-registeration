@@ -81,21 +81,21 @@ if($value['40'] ==='Course Completed'){
 <div id="certificate-content">
       <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/kau_2012_cmyk_eps_14679.png"  width="100px">
       <h1 class="certificate"><B>INTYG</B></h1>'.
-     '<h2 class="name">'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
+     '<h2 class="Intyg">'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
      <div class="display-secret"  ></div>
       <br><br>
-      <p> har genomgott '.' '.'<B>' . $value['38'] .  '</B>. Kursen
+      <p> har genomgått '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
-      Inom kursens ram har foljande larandemol examinerats:<br> '. $value['38'] .
-      '<br><br>Kursen var avslutad och godkand'.' '. $value['38'] .'<br>
-      Kursansvarig:' . ' <B>' . $value['46'] . 
-      '</B></p>
+      Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
+      '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
+      Kursansvarig:' . ' ' . $value['39'] . 
+      '</p>
       <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
       <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/jorg-signatur.png">
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
   <div>
   <div class="left">
-    <em>Jorg Pareigis</em>
+    <em>Jörg Pareigis</em>
   </div>
   <div>
     <em>Head of Centre for Teaching </em>
