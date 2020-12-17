@@ -86,16 +86,16 @@ if($value['40'] ==='Course Completed'){
       <br><br>
       <p> har genomgott '.' '.'<B>' . $value['38'] .  '</B>. Kursen
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
-      Inom kursens ram har foljande larandemol examinerats:<br> '. $value['47'] .
-      '<br><br>Kursen var avslutad och godkand'.' '. $value['48'] .'<br>
-      Kursansvarig:' . ' <B>' . $value['39'] . 
+      Inom kursens ram har foljande larandemol examinerats:<br> '. $value['38'] .
+      '<br><br>Kursen var avslutad och godkand'.' '. $value['38'] .'<br>
+      Kursansvarig:' . ' <B>' . $value['46'] . 
       '</B></p>
       <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
       <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/jorg-signatur.png">
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
   <div>
   <div class="left">
-    <em>Jörg Pareigis</em>
+    <em>Jorg Pareigis</em>
   </div>
   <div>
     <em>Head of Centre for Teaching </em>
