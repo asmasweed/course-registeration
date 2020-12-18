@@ -24,7 +24,9 @@ function asma_load_scripts() {
     wp_enqueue_script('asma-main-js', plugin_dir_url( __FILE__) . 'asma-main.js', $deps, $version, $in_footer); 
     wp_enqueue_style( 'asma-main-css', plugin_dir_url( __FILE__) . 'asma-main.css');
     wp_localize_script( 'asma-main-js', 'test', array( 'ajax_url' => admin_url('admin-ajax.php')) );
-    wp_enqueue_script('jspdf.min.js', plugin_dir_url( __FILE__) . 'jspdf.min.js', $deps, $version, $in_footer);     
+    wp_enqueue_script('jspdf.min.js', plugin_dir_url( __FILE__) . 'jspdf.min.js', $deps, $version, $in_footer);    
+    wp_enqueue_script('html2canvas.min.js', plugin_dir_url( __FILE__) . 'html2canvas.min.js', $deps, $version, $in_footer);      
+ 
 
 
 }
@@ -594,75 +596,3 @@ function load_student_template( $template ) {
 
 add_filter( 'single_template', 'load_student_template' );
 
-// Certificat section
-/*
-add_shortcode('download-certificate', 'asma_my_certificate');
-function asma_my_certificate(){
-  global $post;
-  $current_user = wp_get_current_user();
-  $course_title = get_the_title($post->ID);
-  $search_criteria = array(
-    'status'        => 'active',
-    'field_filters' => array(
-        'mode' => 'any',
-        array(
-            'key'   => '1.3', 
-            'value' => $current_user->user_firstname
-        )
-        
-    )
-);
-
-$entries  = GFAPI::get_entries( 5, $search_criteria );
-//var_dump($entries);
-echo '<h3>My courses:</h3>';
-$list = '';
-$certificates = '';
-$list .='<ul>';
-echo'<ul>';
-foreach ($entries as $key => $value) { 
-if($value['40'] ==='Course Completed'){
-  $list .='<li><a href="#" class="certificate-button" data-course="'. $key .'">' . $value['38'] . '</a></li>' ;
-  '<br><br><hr>';
-  $certificates .= '<div class="certificates-list">
-    <div class="editor" >
-    <p>The certificate below will be downloaded to your computer. No information will be stored on the server.</p>
-    Entery your personal number here:
-  <input id="secret"></input><br>
-  <hr class ="left" style="border-top: dotted 1px; width:100%;" /></div>
-    
-    <div class="course hide" id="' . $key . '" style="display:none;"   border: 1px solid #000;
-    padding: 20px;>
-        <img src="https://www.arbetsformedlingen.se/rest/arbetsgivare/rest/af/v3/organisation/2021003120/logotyper/logo-200x200.png">
-        <h1 class="certificate"><B>Intyg</B></h1>'.
-       '<h2>'. $current_user->user_firstname .' '. $current_user->user_lastname .'</h2><br>
-       <div id="display-secret"  ></div>
-        <br><br><br><br><br><br><br>
-       <h3> har genomgått '.' '.'<B>' . $value['38'] .  '.</B></h3><br>
-       <p>' . $value['20'] . '</p>
-        <lable><B>Karlstad' .', '. date('F Y').'</B></lable><br><br>
-        <img src="http://localhost:8888/wordpress/wp-content/uploads/2020/11/signature.png">
-        <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
-    <div>
-    <div class="left">
-      <em>Jörg Pareigis</em>
-    </div>
-    <div>
-      <em>Head of Centre for Teaching </em>
-    </div>
-    <div>
-     <em>and Learning </em>                                         
-    </div>
-  </div>
-        <button id="cmd">Download PDF</button>
-    </div>';
-  ;
- }
-
-}
-echo $list . '</ul>' . $certificates . '</ul>';
-
- 
-  
-}
-//add_filter('the_content', 'asma_my_certificate', 1);*/

@@ -88,8 +88,8 @@ if($value['40'] ==='Course Completed'){
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
       Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
       '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
-      Kursansvarig:' . ' ' . $value['39'] . 
-      '</p>
+      Kursansvarig:' . ' <B>' . $value['39'] . 
+      '</B></p>
       <lable><B>Karlstad' .', '. date('d F Y').'</B></lable><br><br>
       <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/jorg-signatur.png">
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
@@ -107,8 +107,9 @@ if($value['40'] ==='Course Completed'){
 </div>
 <div class="editor" ></div>
       <button id="cmd">Download PDF</button>
+  </div>
   </div>';
-;
+
 }
 
 }
