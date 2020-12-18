@@ -42,7 +42,6 @@ buttons.forEach((button) => {
 
 //https://parall.ax/products/jspdf
 
-
 function demoFromHTML() {
 
   var HTML_Width = jQuery("#certificate-content").width();
@@ -61,24 +60,25 @@ function demoFromHTML() {
   }).then(function(canvas) {
     canvas.getContext('2d');
     
-    console.log(canvas.height+"  "+canvas.width);
+    //console.log(canvas.height+"  "+canvas.width);
     
     
-    var imgData = canvas.toDataURL("image/jpeg", 1.0);
+    var imgData = canvas.toDataURL("image/png");
     var pdf = new jsPDF('p', 'in', [612, 792]);
-      pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+      pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
     
     
     for (var i = 1; i <= totalPDFPages; i++) { 
       pdf.addPage(PDF_Width, PDF_Height);
-      pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+      pdf.addImage(imgData, 'PNG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
     }
     
       pdf.save("HTML-Document.pdf");
+      window.open(imgData);
       });
 };
 
-jQuery('#cmd').click(function () {    
+jQuery("#cmd").click(function () {    
 demoFromHTML();
 });
 
