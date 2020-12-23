@@ -74,7 +74,7 @@ function demoFromHTML() {
     }
     
       pdf.save("HTML-Document.pdf");
-     // window.open(imgData);
+      window.open(imgData);
       });
 };
 

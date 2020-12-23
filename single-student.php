@@ -95,14 +95,11 @@ if($value['40'] ==='Course Completed'){
       <div><hr class ="left" style="border-top: dotted 1px; width:30%;" /></div><br><br>
   <div>
   <div class="left">
-    <em>Jörg Pareigis</em>
+  <em>Jörg Pareigis<br>
+  Head of Centre <br>
+  for Teaching and Learning</em>
   </div>
-  <div>
-    <em>Head of Centre for Teaching </em>
-  </div>
-  <div>
-   <em>and Learning </em>                                         
-  </div>
+  
 </div>
 </div>
 <div class="editor" ></div>
