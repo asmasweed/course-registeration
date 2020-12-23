@@ -47,7 +47,7 @@ function demoFromHTML() {
   var HTML_Width = jQuery("#certificate-content").width();
   var HTML_Height = jQuery("#certificate-content").height();
   var top_left_margin = 15;
-  var PDF_Width = HTML_Width+(top_left_margin*1);
+  var PDF_Width = HTML_Width+(top_left_margin*2);
   var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
   var canvas_image_width = HTML_Width;
   var canvas_image_height = HTML_Height;
@@ -60,11 +60,11 @@ function demoFromHTML() {
   }).then(function(canvas) {
     canvas.getContext('2d');
     
-    //console.log(canvas.height+"  "+canvas.width);
+    console.log(canvas.height+"  "+canvas.width);
     
     
     var imgData = canvas.toDataURL("image/png");
-    var pdf = new jsPDF('p', 'in ', [612, 792]);
+    var pdf = new jsPDF('p', 'in', [612, 792]);
       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
     
     
