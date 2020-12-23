@@ -88,7 +88,7 @@ if($value['40'] ==='Course Completed'){
       motsvarar'.' '.'<B>'. $value['46'] .' '. '</B>timmar.<br>
       Inom kursens ram har följande lärandemål examinerats:<br> '. $value['47'] .
       '<br><br>Kursen var avslutad och godkänd'.' '. $value['48'] .'<br>
-      Kursansvarig:'  . $value['39'] . 
+      Kursansvarig: '  . $value['39'] . 
       '</p>
       <lable>Karlstad' .', '. date('d F Y').'</lable><br><br>
       <img src="https://sola.kau.se/course-registration/wp-content/uploads/sites/138/2020/12/jorg-signatur.png">
