@@ -64,7 +64,7 @@ function demoFromHTML() {
     
     
     var imgData = canvas.toDataURL("image/png");
-    var pdf = new jsPDF('p', 'px ', [612, 792]);
+    var pdf = new jsPDF('p', 'in ', [612, 792]);
       pdf.addImage(imgData, 'PNG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
     
     
